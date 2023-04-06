@@ -33,10 +33,21 @@ Which (if any) progressive web app feature(s) does your app support?
 
 ## Mockup images
 
-**[Add images/photos that show your mockup](https://stackoverflow.com/questions/10189356/how-to-add-screenshot-to-readmes-in-github-repository) along with a very brief caption:**
+![](pics/movies.png?raw=true "Home")
+* User can view list of movies they want to watch.
+* User can click on movie to show more details about the movie
+* User can add or remove movies from their list
 
-![](https://media.giphy.com/media/26ufnwz3wDUli7GU0/giphy.gif)
+![](pics/movie_search.png?raw=true "Search")
+* User can search for movies from the home screen
+* Results are listed without taking user to new page
+* User can select movie to view more details
 
+![](pics/movie_details.png?raw=true "Details")
+* User can view the title, year, and description of movie.
+* User can see where they can watch the movie.
+* User can view tags associated with movie.
+* User can add movie to their movie list.
 
 ## Testing Notes
 
