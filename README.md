@@ -49,6 +49,10 @@ Which (if any) progressive web app feature(s) does your app support?
 * User can view tags associated with movie.
 * User can add movie to their movie list.
 
+![](pics/login.png?raw=true "Details")
+* User can create an account and access settings.
+* Will lead user to user account page that will allow them to access and change info.
+
 ## Testing Notes
 
 **Is there anything special we need to know in order to effectively test your app? (optional):**
