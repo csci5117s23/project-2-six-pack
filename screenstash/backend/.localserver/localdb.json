@@ -1,0 +1,14 @@
+[
+  [
+    "_defaultkvspace",
+    {
+      "foo": {
+        "val": "bar"
+      }
+    }
+  ],
+  [
+    "codehooks",
+    {}
+  ]
+]
