@@ -7,14 +7,14 @@ import {app, Datastore} from 'codehooks-js'
 import {crudlify} from 'codehooks-crudlify'
 import * as yup from 'yup';
 
-var movieEntries = {
-    title: '',
-    desc : '',
-    imdbID: 0,
-    // internalID: 0,
-    imageLink: '',
-    services: [0],
-}
+// var movieEntries = {
+//     title: '',
+//     desc : '',
+//     imdbID: 0,
+//     // internalID: 0,
+//     imageLink: '',
+//     services: [0],
+// }
 
 let movieEntries =
   yup.object().shape({
@@ -30,10 +30,10 @@ let movieEntries =
   })
 
 
-var serviceEntries = {
-    name: '',
-    serviceID: 0,
-}
+// var serviceEntries = {
+//     name: '',
+//     serviceID: 0,
+// }
 
 let serviceEntries =
     yup.object().shape({
@@ -49,11 +49,11 @@ let serviceEntries =
 
 // Add CRUD routes with yup schema for two collections
 
-var user = {
-    name: '',
-    lists: [0],
-    // insert auth stuff here
-}
+// var user = {
+//     name: '',
+//     lists: [0],
+//     // insert auth stuff here
+// }
 
 let user =
     yup.object().shape({
@@ -65,11 +65,11 @@ let user =
             ),
     })
 
-var list = {
-    listID : 0,
-    listName: '',
-    listContents: [0],
-}
+// var list = {
+//     listID : 0,
+//     listName: '',
+//     listContents: [0],
+// }
 
 let list =
     yup.object().shape({
@@ -86,7 +86,7 @@ let list =
 
 
 // Use Crudlify to create a REST API for any collection
-crudlify(app, {movieEntries, customer, serviceEntries, user, list})
+crudlify(app, {movieEntries, serviceEntries, user, list})
 
 // bind to serverless runtime
 export default app.init();
