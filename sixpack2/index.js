@@ -1,122 +1,91 @@
 import {app, Datastore} from 'codehooks-js'
 import {crudlify} from 'codehooks-crudlify'
-import * as yup from 'yup';
 import {array, object, string} from 'yup';
 import jwtDecode from 'jwt-decode';
-// var movieEntries = {
-//     title: '',
-//     desc : '',
-//     imdbID: 0,
-//     // internalID: 0,
-//     imageLink: '',
-//     services: [0],
-// }
 
-let movieEntries =
-  yup.object().shape({
-    title: yup.string().required(),
-    desc: yup.string().required(),
-    imdbID: yup.number().required(),
-    imageLink: yup.string().required(),
-    products: yup.array().of(
-        yup.object({
-            services: yup.number().required()
-        })
-      ),
-  })
-
-
+/**
+ * A schema representing a streaming service
+ */
 const serviceSchema = object({
+    /**
+     * The name of the streaming service
+     */
     name: string().required(),
+    /**
+     * A URL pointing to an icon image for the service
+     */
     iconURL: string().required()
 });
 
-// var serviceEntries = {
-//     name: '',
-//     serviceID: 0,
-// }
-
-let serviceEntries =
-    yup.object().shape({
-        name: yup.string().required(),
-        serviceID: yup.number().required(),
-    })
-
-
-// // product schema, any json is allowed
-// let product = yup.object().shape({
-//   json: yup.mixed()
-// })
-
-// Add CRUD routes with yup schema for two collections
+/**
+ * A schema representing a link between a movie and a streaming service
+ */
 const serviceEntrySchema = object({
+    /**
+     * A URL pointing to where the user can view the movie this service entry is for on the service with the associated
+     * `serviceID`.
+     */
     link: string().required(),
+    /**
+     * The ID of the service in the `serviceSchema` that this entry is linking to
+     */
     serviceID: string().required(),
 });
 
+/**
+ * A schema representing a movie and the streaming services it can be viewed on
+ */
 const movieSchema = object({
+    /**
+     * The title of the movie
+     */
     title: string().required(),
+    /**
+     * A description for the movie
+     */
     description: string().required(),
+    /**
+     * The IMDB ID for this movie
+     */
     imdbID: string().required(),
+    /**
+     * A link to a preview image for this movie
+     */
     imageLink: string().required(),
+    /**
+     * The services this movie can be viewed on
+     */
     services: array.of(serviceEntrySchema),
 });
 
+/**
+ * A schema representing a collection of movies a user has created
+ */
 const movieListSchema = object({
+    /**
+     * The Clerk ID of the user that created this list
+     */
     creatorID: string().required(),
+    /**
+     * The name of this list
+     */
     name: string().required(),
-    movieIDs: array.of(string()),
+    /**
+     * The IDs of the movies contained in this list
+     */
+    movieIDs: array.of(string()).required(),
 });
 
-async function createMovieEntry(req, res) {
-    const conn = await Datastore.open();
-    // formatting code here return stringified res
-    var res;
-    const doc = await conn.insertOne('movieEntries', res);
-    // return new document to client
-    res.status(201).json(doc);
+/**
+ * Creates an entry in the `movie` collection with the contents of the given request body.
+ *
+ * @param request the request made to create a movie into
+ * @returns {Promise<Object>} a promise that will resolve into the movie object added to the `DataStore`
+ */
+async function createMovieEntry(request) {
+    const connection = await Datastore.open();
+    return await connection.insertOne('movie', request.body);
 }
-
-// var user = {
-//     name: '',
-//     lists: [0],
-//     // insert auth stuff here
-// }
-
-let user =
-    yup.object().shape({
-        name: yup.string().required(),
-        lists: yup.array().of(
-            yup.object({
-                listID: yup.number().required()
-            })
-            ),
-    })
-
-// var list = {
-//     listID : 0,
-//     listName: '',
-//     listContents: [0],
-// }
-
-let list =
-    yup.object().shape({
-        listID: yup.number().required(),
-        listName: yup.string().required(),
-        listContents: yup.array().of(
-            yup.object({
-                movieID: yup.number().required()
-            })
-            ),
-    })
-
-
-
-
-
-
-app.post('/movie', createMovieEntry);
-app.get('/movie', getMovieEntry);
 
 // Authentication middleware adapted from example tech stack: https://github.com/csci5117s23/Tech-Stack-2-Kluver-Demo/blob/main/backend/index.js
 // Step 1: Save the given authentication token for future middleware functions
@@ -181,8 +150,10 @@ app.use('/todos/:id', async (request, response, next) => {
     // Call crudlify implementation
     next();
 });
+
 // Use Crudlify to create a REST API for any collection
-crudlify(app, {'movie-list': movieListSchema,movieEntries, serviceEntries, user, list})
+crudlify(app, {'movie-list': movieListSchema});
+
 // TODO: add routes to update movies which will modify serviceSchema, serviceEntrySchema, and movieSchema
 
 // bind to serverless runtime
