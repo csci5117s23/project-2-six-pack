@@ -1,7 +1,7 @@
 const backend_base = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
 export async function getList(authToken, content) {
-    const result = await fetch(backend_base+"/lists/" + content._id,{
+    const result = await fetch(backend_base+"/movie-list/" + content._id,{
         'method':'GET',
         'headers': {'Authorization': 'Bearer ' + authToken}
     })
@@ -9,7 +9,7 @@ export async function getList(authToken, content) {
 }
 
 export async function addList(authToken, content) {
-    const result = await fetch(backend_base+"/lists/" + content._id,{
+    const result = await fetch(backend_base+"/movie-list/" + content._id,{
         'method':'POST',
         'headers': {'Authorization': 'Bearer ' + authToken,
         'Content-Type': 'application/json'},
@@ -20,7 +20,7 @@ export async function addList(authToken, content) {
 
 
 export async function deleteList(authToken, content) {
-    const result = await fetch(backend_base+"/lists/" + content._id,{
+    const result = await fetch(backend_base+"/movie-list/" + content._id,{
         'method':'DELETE',
         'headers': {'Authorization': 'Bearer ' + authToken},
     })
@@ -28,7 +28,7 @@ export async function deleteList(authToken, content) {
 }
 
 export async function updateList(authToken, content) {
-    const result = await fetch(backend_base+"/lists/" + content._id, {
+    const result = await fetch(backend_base+"/movie-list/" + content._id, {
         'method':'PUT',
         'headers': {'Authorization': 'Bearer ' + authToken,
         'Content-Type': 'application/json'},
