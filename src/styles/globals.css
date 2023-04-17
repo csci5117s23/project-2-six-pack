@@ -89,6 +89,14 @@ body {
   overflow-x: hidden;
 }
 
+.image_height {
+ max-height: 32rem; 
+}
+
+.inter {
+  font-family: Inter, sans-serif;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(

@@ -19,7 +19,7 @@ export default function Home() {
       <Navbar />
       <main className={styles.main}>
         {/* Grid of movies/cards */}
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-5">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-5 justify-center">
           {/* Movie list */}
           <div className="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-black/30 rounded">
             <img className="rounded h-auto max-w-full transition-transform duration-500 group-hover:scale-125" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Flostposters.com%2Fwp-content%2Fuploads%2F2023%2F03%2FThe-Hunger-Games-The-Ballad-Of-Songbirds-And-Snakes-600x925.jpg&f=1&nofb=1&ipt=fdeb905f98a0b5544924fb7a58663b421580fd5340c86210d8ee5a745366894d&ipo=images" alt="" />
