@@ -15,9 +15,11 @@ export default function movieDetails() {
          
         <div className="row-span-1 col-span-3 justify-center mt-5">
             <div className="inter md:text-2xl font-bold text-center">Where To Watch</div>
-            <a className="justify-center" href="https://play.hbomax.com/page/urn:hbo:page:GYKjr7A3svLHDwwEAAAB9:type:feature">
-                <img className="h-20 md:h-min justify-center" src="https://img.icons8.com/ios-glyphs/256/hbo-max.png"></img>
-            </a>
+            <div className="justify-center flex">
+                <a href="https://play.hbomax.com/page/urn:hbo:page:GYKjr7A3svLHDwwEAAAB9:type:feature"><img className="h-20 md:h-min justify-center" src="https://img.icons8.com/ios-glyphs/256/hbo-max.png"></img></a>
+                <img className="h-20 md:h-min justify-center" src="https://img.icons8.com/fluency/256/amazon-prime-video.png"></img>
+                {/* https://img.icons8.com/fluency/256/amazon-prime-video.png */}
+            </div>
         </div>
         <div className="row-span-1 col-span-3 justify-center space-x-4 mt-5">
             <button className="bg-transparent hover:bg-slate-700 text-slate-200 font-bold py-2 px-4 rounded-full outline outline-2 outline-slate-700">Horror</button>
