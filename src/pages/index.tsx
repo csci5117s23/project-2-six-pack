@@ -4,7 +4,7 @@ import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import Navbar from '@/components/Navbar'
 import Link from 'next/link'
-
+import {SignedIn, SignedOut, SignInButton, UserButton} from "@clerk/nextjs";
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
