@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: [
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -6,8 +7,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: (theme) => ({
-        // 'hero-pattern': "url('https://i.ibb.co/Qn5BR8N/bg.png')",
-        'hero-pattern': "/pics/Frame 1.png"
+        'hero-pattern': "url('https://i.ibb.co/Qn5BR8N/bg.png')",
       }),
       animation: {
         'ltr-linear-infinite': 'move-bg 5s linear infinite',
