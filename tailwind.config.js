@@ -6,11 +6,11 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: (theme) => ({
-        // 'hero-pattern': "url('https://i.ibb.co/Qn5BR8N/bg.png')",
-        'hero-pattern': "/pics/Frame 1.png"
+        // CHANGE PIC
+        'hero-pattern': "url('~/public/background_test.png')"
       }),
       animation: {
-        'ltr-linear-infinite': 'move-bg 5s linear infinite',
+        'ltr-linear-infinite': 'move-bg 20s linear infinite',
       },
       keyframes: {
         'move-bg': {
