@@ -8,12 +8,6 @@ export default function Home() {
             <Navbar />
             {/* <Layout> */}
             <div className="grid grid-cols-3 h-screen bg-cover bg-gray-500 flex flex-col items-center justify-center bg-movies-background bg-repeat animate-ltr-linear-infinite">
-                {/* <div>
-                        <main className='w-full flex gap-8 items-center justify-center'>
-                            Hello Index Page!
-                            <Link href="/dashboard" className="rounded-full bg-deep-purple p-2">Dashboard</Link>
-                        </main>
-                    </div> */}
                 <div></div>
                 <div className="h-screen bg-gradient-to-l from-black to-transparent"></div>
                 <div className="p-10 h-screen bg-black">
