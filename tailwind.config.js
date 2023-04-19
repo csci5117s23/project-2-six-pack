@@ -18,6 +18,9 @@ module.exports = {
           '100%': { 'background-position': '256px 0' },
         },
       },
+      colors:{
+        'deep-purple': '#130354',
+      },
     },
   },
   variants: {},
