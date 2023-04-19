@@ -39,6 +39,10 @@ async function makeApiCall<ResponseType>(getToken: GetToken, path: string, metho
     return responseContent;
 }
 
+export async function getOrCreateInitialMovieList(getToken: GetToken): Promise<MovieList | null> {
+    return await makeApiCall<MovieList>(getToken, 'initial-movie-list', 'GET', null, 'retrieving initial movie list');
+}
+
 export async function getMovieListById(getToken: GetToken, listId: string): Promise<MovieList | null> {
     return await makeApiCall<MovieList>(getToken, `movie-list/${listId}`, 'GET', null, 'retrieving movie by ID');
 }

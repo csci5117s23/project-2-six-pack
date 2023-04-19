@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import Navbar from '@/components/Navbar'
-import Link from 'next/link'
-import MovieList from '@/components/MovieList'
+import MovieList from "@/components/MovieList";
 
 export default function Dashboard() {
     return (
@@ -14,7 +13,7 @@ export default function Dashboard() {
             <Navbar />
             <main className='h-screen'>
                 {/* Movie list */}
-                <MovieList />
+                <MovieList movieListId={null}/>
             </main>
         </>
     )
