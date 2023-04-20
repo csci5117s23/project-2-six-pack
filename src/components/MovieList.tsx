@@ -12,20 +12,26 @@ type ModalProps = {
 
 const Modal = ({ isOpen, onClose }: ModalProps) => {
     return (
-      <Dialog open={isOpen} onClose={onClose} className="flex justify-center w-4/12 md:w-9/12 md:h-5/6 border-2 border-violet-500 rounded-md fixed z-10 inset-20 bg-violet-600 overflow-y-auto">
-        <div className="flex justify-items-center justify-center">
-            <Dialog.Panel className="fixed inset-20">
+      <Dialog open={isOpen} onClose={onClose} className="relative z-50 bg-violet-600 overflow-y-auto">
+        <div className="fixed inset-0 flex justify-center px-8 py-14">
+            <Dialog.Panel className="w-full max-w-sm md:max-w-full rounded bg-gradient-to-b from-black to-transparent border-2 border-slate-800">
             <Dialog.Title className="flex justify-center inter">Add To Stash!</Dialog.Title>
-            <Dialog.Description className="flex justify-center inter">
-                Add movie
-            </Dialog.Description>
-    
-            <p className="flex text-center inter">
-                Stuff...
-            </p>
-    
-            <button className=" justify-center inter" onClick={onClose}>Add</button>
-            <button className=" justify-center inter" onClick={onClose}>Cancel</button>
+            
+            <div className="flex justify-center inter">
+                <input
+                    className="w-1/2 rounded-[7px] bg-transparent px-3 py-2.5 border border-hidden rounded-md text-sm shadow-sm placeholder-slate-400
+                    focus:outline-none focus:border-slate-700 focus:ring-1 focus:ring-slate-700 inter text-sm font-normal"
+                    placeholder="Movie Title..."
+                />
+            </div>
+            <div className="flex justify-center border-2 border-red-500 overflow-y-auto mx-2 movie_list_h">
+                <div className="grid grid-cols-2 md:grid-cold-4">
+
+                </div>
+            </div>
+            <div className="flex justify-center mt-1">
+                <button className="inter" onClick={onClose}>Close</button>
+            </div>
             </Dialog.Panel>
         </div>
       </Dialog>
