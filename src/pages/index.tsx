@@ -6,8 +6,8 @@ export default function Home() {
     return (
         <>
             <Navbar />
-            {/* <Layout> */}
-            <div className="grid grid-cols-3 h-screen bg-cover bg-gray-500 flex flex-col items-center justify-center bg-movies-background bg-repeat animate-ltr-linear-infinite">
+            {/* For large screens */}
+            <div className="hidden lg:grid grid grid-cols-3 h-screen bg-cover bg-gray-500 flex flex-col items-center justify-center bg-movies-background bg-repeat animate-ltr-linear-infinite">
                 <div></div>
                 <div className="h-screen bg-gradient-to-l from-black to-transparent"></div>
                 <div className="p-10 h-screen bg-black">
@@ -37,7 +37,24 @@ export default function Home() {
                 </div>
             </div>
 
-            {/* </Layout> */}
+            {/* For small screens */}
+            <div className="lg:hidden h-screen grid-container grid grid-cols-10 bg-cover bg-gray-500 flex flex-col items-center justify-center bg-movies-background bg-repeat animate-ltr-linear-infinite">
+                <div className="h-screen bg-gradient-to-l from-black to-transparent col-span-2"></div>
+                <div className="text-center pt-10 h-screen bg-black col-span-6">
+                    <div className="font-bold text-4xl text-white mb-5">
+                        <div className="items-center">
+                            <span className="font-bold text-white px-2">ScreenStash</span>
+                        </div>
+                    </div>
+                    <div className="mb-10">
+                        Screen Stash is a user-friendly website that allows you to create a personalized list of movies and TV shows that you want to watch. Not only that, it also helps you find out where you can watch them on various streaming services, all in one place.
+                    </div>
+                    <div>
+                        <Link href="/dashboard" className="rounded-full font-bold bg-deep-purple p-3">Dashboard</Link>
+                    </div>
+                </div>
+                <div className="h-screen bg-gradient-to-r from-black to-transparent col-span-2"></div>
+            </div>
         </>
     )
 }
