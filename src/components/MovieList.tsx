@@ -11,26 +11,56 @@ type ModalProps = {
 };
 
 const Modal = ({ isOpen, onClose }: ModalProps) => {
+    const [inputText, setInputText] = useState("")
+    // console.log(inputText)
     return (
       <Dialog open={isOpen} onClose={onClose} className="relative z-50 bg-violet-600 overflow-y-auto">
         <div className="fixed inset-0 flex justify-center px-8 py-14">
             <Dialog.Panel className="w-full max-w-sm md:max-w-full rounded bg-gradient-to-b from-black to-transparent border-2 border-slate-800">
             <Dialog.Title className="flex justify-center inter">Add To Stash!</Dialog.Title>
-            
+            {/* SEARCH FOR MOVIE/SHOW */}
             <div className="flex justify-center inter">
                 <input
                     className="w-1/2 rounded-[7px] bg-transparent px-3 py-2.5 border border-hidden rounded-md text-sm shadow-sm placeholder-slate-400
                     focus:outline-none focus:border-slate-700 focus:ring-1 focus:ring-slate-700 inter text-sm font-normal"
                     placeholder="Movie Title..."
+                    id="addMovieSearch"
+                    autoComplete="off"
+                    onChange={(e) => setInputText(e.target.value)}
                 />
-            </div>
-            <div className="flex justify-center border-2 border-red-500 overflow-y-auto mx-2 movie_list_h">
-                <div className="grid grid-cols-2 md:grid-cold-4">
-
+                <div className="flex justify-center">
+                    <button className="px-3 ml-3 bg-deep-purple hover:bg-vibrant-purple text-slate-200 hover:text-slate-200 rounded-full transition duration-300 inter" type="submit" onClick={() => console.log(inputText)}>Search</button>
                 </div>
             </div>
+            {/* WE CAN EITHER LIST ALL MOVIES/SHOWS FROM THE API AND FILTER WHEN USER SEARCHES OR ONLY SHOW RESULTS WHEN USER SEARCHES */}
+            {/* EITHER WAY, THIS SHOULD BE THE GENERAL LAYOUT, REPLACE THE INNER DIV WITH MOVIE API COMPONENT */}
+            <div className="grid place-items-start justify-items-center grid-flow-row overflow-y-auto mx-2 movie_list_h">
+                <div className="grid gap-4 grid-cols-2 md:grid-cols-8 lg:gap-6 mt-1">
+                    <div className="rounded h-64 md:h-80 h-auto w-32 md:w-48 md:max-h-80 bg-red-500">asda</div>
+                    <div className="rounded h-64 md:h-80 h-auto w-32 md:w-48 md:max-h-80 bg-green-500">asda</div>
+                    <div className="rounded h-64 md:h-80 h-auto w-32 md:w-48 md:max-h-80 bg-yellow-500">asda</div>
+                    <div className="rounded h-64 md:h-80 h-auto w-32 md:w-48 md:max-h-80 bg-slate-500">asda</div>
+                    <div className="rounded h-64 md:h-80 h-auto w-32 md:w-48 md:max-h-80 bg-red-500">asda</div>
+                    <div className="rounded h-64 md:h-80 h-auto w-32 md:w-48 md:max-h-80 bg-green-500">asda</div>
+                    <div className="rounded h-64 md:h-80 h-auto w-32 md:w-48 md:max-h-80 bg-yellow-500">asda</div>
+                    <div className="rounded h-64 md:h-80 h-auto w-32 md:w-48 md:max-h-80 bg-purple-500">asda</div>
+                    <div className="rounded h-64 md:h-80 h-auto md:w-48 md:max-h-80 bg-slate-500">asda</div>
+                    <div className="rounded h-64 md:h-80 h-auto w-32 md:w-48 md:max-h-80 bg-blue-500">asda</div>
+                    <div className="rounded h-64 md:h-80 h-auto md:w-48 md:max-h-80 bg-red-500">asda</div>
+                    <div className="rounded h-64 md:h-80 h-auto w-32 md:w-48 md:max-h-80 bg-green-500">asda</div>
+                    <div className="rounded h-64 md:h-80 h-auto w-32 md:w-48 md:max-h-80 bg-yellow-500">asda</div>
+                    <div className="rounded h-64 md:h-80 h-auto w-32 md:w-48 md:max-h-80 bg-slate-500">asda</div>
+                    <div className="rounded h-64 md:h-80 h-auto w-32 md:w-48 md:max-h-80 bg-red-500">asda</div>
+                    <div className="rounded h-64 md:h-80 h-auto w-32 md:w-48 md:max-h-80 bg-green-500">asda</div>
+                    <div className="rounded h-64 md:h-80 h-auto w-32 md:w-48 md:max-h-80 bg-yellow-500">asda</div>
+                    <div className="rounded h-64 md:h-80 h-auto w-32 md:w-48 md:max-h-80 bg-purple-500">asda</div>
+                    <div className="rounded h-64 md:h-80 h-auto md:w-48 md:max-h-80 bg-slate-500">asda</div>
+                    <div className="rounded h-64 md:h-80 h-auto w-32 md:w-48 md:max-h-80 bg-blue-500">asda</div>
+                </div>
+            </div>
+
             <div className="flex justify-center mt-1">
-                <button className="inter" onClick={onClose}>Close</button>
+                <button className="text-xs inter hover:text-gray-400" onClick={onClose}>Close</button>
             </div>
             </Dialog.Panel>
         </div>
