@@ -37,7 +37,7 @@ const Navbar = ({}) => {
 
                     <div className="hidden md:flex items-center space-x-1">
                         <a href="" className="py-5 px-3 text-white-700 hover:text-gray-300">Search</a>
-                        <a href="" className="py-5 px-3">Now Showing</a>
+                        <a href="" className="py-5 px-3 text-white-700 hover:text-gray-300">Now Showing</a>
                         <SignedOut>
                             <SignInButton redirectUrl='/dashboard'/>
                         </SignedOut>

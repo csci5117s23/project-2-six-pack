@@ -97,6 +97,10 @@ body {
   font-family: Inter, sans-serif;
 }
 
+.movie_list_h {
+  height: 87%;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
