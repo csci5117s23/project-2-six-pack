@@ -3,6 +3,9 @@ import {crudlify} from 'codehooks-crudlify'
 import {array, object, string} from 'yup';
 import jwtDecode from 'jwt-decode';
 import {MovieList} from "../src/modules/types";
+import {TmdbClient} from 'tmdb-js-wrapper/src/tmdb-js/tmdb-js';
+
+let tmdbClient = new TmdbClient(process.env.TMDB_API_KEY);
 
 /**
  * A schema representing a streaming service
@@ -76,6 +79,68 @@ const movieListSchema = object({
      */
     movieIDs: array().of(string()).required(),
 });
+
+type TmdbMovieSearchResult = {
+    /**
+     * The URL path to a poster image for the movie
+     */
+    poster_path: string | null,
+    /**
+     * true if this movie is an adult film, false otherwise
+     */
+    adult: boolean;
+    /**
+     * A description of the movie
+     */
+    overview: string;
+    /**
+     * The release date of the movie in YYYY-MM-DD format
+     */
+    release_date: string;
+    genre_ids: number[];
+    id: number;
+    /**
+     * Title of the movie in the original language
+     */
+    original_title: string;
+    /**
+     * The standard identifier for the original language of the movie
+     */
+    original_language: string;
+    /**
+     * The English title of the movie
+     */
+    title: string;
+    /**
+     * The URL path to a backdrop image for the movie
+     */
+    backdrop_path: string | null;
+    popularity: number;
+    vote_count: number;
+    video: boolean;
+    vote_average: number;
+};
+
+type TmdbMovieSearchResults = {
+    /**
+     * The page number the contained results are on
+     */
+    page: number;
+    result: TmdbMovieSearchResult[];
+    /**
+     * The total number of results matching the query
+     */
+    total_results: number;
+    /**
+     * The number of pages of results matching the query
+     */
+    total_pages: number;
+};
+
+type TmdbMovieSearchErrorResponse = {
+    status_message: string;
+    status_code: number;
+};
 
 /**
  * Creates an entry in the `movie` collection with the contents of the given request body.
@@ -200,6 +265,23 @@ app.get('/initial-movie-list', async (request: any, response: any): Promise<void
         console.error(e);
         response.status(500).end(e);
     }
+});
+
+app.get('/search-media/:title', async (request: any, response: any): Promise<void> => {
+    // request.query would be cleaner here, but that causes Codehooks to internally respond with a 404,
+    // "No collection search-media"
+    const title = request.params.title;
+
+    const searchSection = tmdbClient.getSearchSection();
+    const searchResults: TmdbMovieSearchResults | TmdbMovieSearchErrorResponse[] = await searchSection.searchMoviesAsync(title, 1, 1, false);
+
+    if (searchResults[0]['status_message'] !== undefined) {
+        // The search API call failed
+        response.status(500).json(searchResults);
+        return;
+    }
+
+    response.json(searchResults);
 });
 
 // Use Crudlify to create a REST API for any collection
