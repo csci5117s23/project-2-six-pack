@@ -1,11 +1,11 @@
-import {GetToken} from "@clerk/types";
-import {Movie, MovieList, ServiceEntry} from "@/modules/types";
-import {HTTP_METHOD} from "next/dist/server/web/http";
+import { GetToken } from "@clerk/types";
+import { Movie, MovieList, ServiceEntry } from "@/modules/types";
+import { HTTP_METHOD } from "next/dist/server/web/http";
 
 const BACKEND_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
 async function makeApiCall<ResponseType>(getToken: GetToken, path: string, method: HTTP_METHOD, body: any | null, actionDescription: string): Promise<ResponseType | null> {
-    const token: string | null = await getToken({template: "codehooks"}).catch(reason => {
+    const token: string | null = await getToken({ template: "codehooks" }).catch(reason => {
         console.error('Error while retrieving token:', reason);
         return null;
     });
@@ -17,9 +17,9 @@ async function makeApiCall<ResponseType>(getToken: GetToken, path: string, metho
         method: method,
         headers: {
             'Authorization': `Bearer ${token}`,
-            ...(body !== null ? {'Content-Type': 'application/json'} : {})
+            ...(body !== null ? { 'Content-Type': 'application/json' } : {})
         },
-        ...(body !== null ? {body: JSON.stringify(body)} : {})
+        ...(body !== null ? { body: JSON.stringify(body) } : {})
     }).catch(reason => {
         console.error(`Error while ${actionDescription}, request path: "`, path, '", request body: "', body, '"', reason);
         return null;
