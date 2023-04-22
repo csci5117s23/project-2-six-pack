@@ -15,7 +15,7 @@ async function makeTMDBApiCall<ResponseType>(getToken: GetToken, path: string, m
         return null;
     }
 
-    const response: Response | null = await fetch(`${TMDB_URL_ROOT}/${path}${TMDB_URL_END}${TMDB_URL_END}`, {
+    const response: Response | null = await fetch(`${path}`, {
         method: method,
         headers: {
             'Authorization': `Bearer ${token}`,
@@ -40,6 +40,8 @@ async function makeTMDBApiCall<ResponseType>(getToken: GetToken, path: string, m
 
     return responseContent;
 }
+// Send in list of search queries eg [["query", "movie name"], ["year", "2021"]]
+// returns a path for fetch request
 function pathGenerator(pathVars) {
     let path = "?api_key="+TBDB_API_KEY;
     for (let i = 0; i < pathVars.length; i++) {
