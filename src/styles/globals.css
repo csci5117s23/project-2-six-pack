@@ -55,7 +55,7 @@
       to bottom right,
       rgba(1, 65, 255, 0),
       rgba(1, 65, 255, 0),
-      rgba(1, 65, 255, 0.3)
+      rgba(14, 40, 116, 0.3)
     );
 
     --tile-start-rgb: 2, 13, 46;
@@ -95,6 +95,10 @@ body {
 
 .inter {
   font-family: Inter, sans-serif;
+}
+
+.movie_list_h {
+  height: 87%;
 }
 
 body {
