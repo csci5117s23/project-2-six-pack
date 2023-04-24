@@ -88,7 +88,7 @@ const MovieList = (props: MovieListProps) => {
 
             setMovieList(movieList);
 
-            for (let mediaId in movieList.movieIDs) {
+            for (let mediaId in movieList.movieIds) {
                 const media: Movie | null = await getMediaInfo(getToken, mediaId);
                 if (media === null) {
                     // TODO: display error
@@ -123,7 +123,7 @@ const MovieList = (props: MovieListProps) => {
                         <li className="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-black/30 rounded">
                             <img
                                 className="rounded h-auto max-w-full transition-transform duration-500 group-hover:scale-125"
-                                src={movie.imageLink} alt=""/>
+                                src={`https://image.tmdb.org/t/p/original${movie.posterImageUrlPath}`} alt=""/>
                             <div
                                 className="absolute inset-0 flex translate-y-[60%] flex-col items-center justify-center px-9 text-center transition-all duration-500 group-hover:translate-y-0">
                                 {/* TODO: ADD PREVIEW DETAILS */}
