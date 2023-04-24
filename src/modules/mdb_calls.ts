@@ -10,13 +10,13 @@ const MOTN_API_HOST = process.env.MOTN_API_HOST;
 
 
 // Make fetch call with url path
-async function tmdbCall(path) {
-    const url = TMDB_URL_ROOT+path;
+async function tmdbCall(pathHead, pathEnd) {
+    const url = TMDB_URL_ROOT + pathHead + "?api_key=" + TBDB_API_KEY + pathEnd + TMDB_URL_END;
     const options = {
         method: 'GET',
         headers: {
             // 'content-type' : ''
-                }
+        }
     };
     try {
         const response = await fetch(url, options);
@@ -50,26 +50,24 @@ async function motnCall(path) {
 // Send in list of search queries eg [["query", "movie name"], ["year", "2021"]]
 // returns a path for fetch request
 function searchPathGenerator(pathVars) {
-    let path = "?api_key=" + TBDB_API_KEY;
+    let path = "";
     for (let i = 0; i < pathVars.length; i++) {
         path += "&" + pathVars[i][0] + "=" + pathVars[i][1];
     }
-    path += TMDB_URL_END;
     return path;
 }
 
 function movieFinder(queryParams) {
     let path = searchPathGenerator(queryParams);
-    return tmdbCall(path);
+    return tmdbCall("search/movie", path);
 }
 
 function genreFinder() {
-    let path = "genre/movie/list?api_key=" + TBDB_API_KEY + TMDB_URL_END;
-    return tmdbCall(path);
+    return tmdbCall("genre/movie/list", path);
 }
 
 function streamingServiceGrabber(mediaId) {
-    let path = "https://streaming-availability.p.rapidapi.com/v2/get/basic?country=us&tmdb_id="+mediaId+"&output_language=en";
+    let path = "https://streaming-availability.p.rapidapi.com/v2/get/basic?country=us&tmdb_id=" + mediaId + "&output_language=en";
     return motnCall(path);
 }
 
