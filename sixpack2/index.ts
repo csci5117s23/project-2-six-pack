@@ -202,8 +202,27 @@ app.get('/initial-movie-list', async (request: any, response: any): Promise<void
     }
 });
 
+app.get('/media/:id', async (request: any, response: any): Promise<void> => {
+    if (request.userToken?.sub === null) {
+        // Authentication is required
+        response.status(401).end();
+        return;
+    }
+
+    const connection = await Datastore.open();
+
+    try {
+        const id = request.params.id;
+
+        response.json(await connection.getOne('media', id));
+    } catch (e) {
+        console.error(e);
+        response.status(500).end(e);
+    }
+});
+
 // Use Crudlify to create a REST API for any collection
-crudlify(app, {'movie-list': movieListSchema, 'media': mediaSchema});
+crudlify(app, {'movie-list': movieListSchema});
 
 // TODO: add routes to update movies which will modify serviceSchema, serviceEntrySchema, and mediaSchema
 
