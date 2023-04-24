@@ -1,5 +1,6 @@
 # Codehooks
 sixpack2/.localserver
+sixpack2/.env
 
 # dependencies
 /node_modules

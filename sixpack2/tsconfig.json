@@ -1,1 +1,4 @@
-{"files":["./index.ts"],"compilerOptions":{"lib":["es2015","dom"]}}
+{"files": [
+  "./index.ts",
+  "tmdb_impl.ts"
+],"compilerOptions":{"lib":["es2015","dom"]}}
