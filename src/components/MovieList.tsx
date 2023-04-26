@@ -141,7 +141,7 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
             </div>
 
             <div className="flex justify-center mt-1">
-                <button className="text-xs inter hover:text-gray-400" onClick={onClose}>Close</button>
+                <button className="text-xs text-white inter hover:text-gray-400" onClick={onClose}>Close</button>
             </div>
             </Dialog.Panel>
         </div>

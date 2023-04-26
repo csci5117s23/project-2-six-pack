@@ -9,7 +9,7 @@ const Navbar = ({}) => {
     };
 
     return (<>
-        <nav className="bg-black-100">
+        <nav className="bg-black text-white">
             <div className="max-w-6xl mx-auto px-4">
                 <div className="flex justify-between">
 
@@ -42,7 +42,7 @@ const Navbar = ({}) => {
                             <SignInButton redirectUrl='/dashboard'/>
                         </SignedOut>
                         <SignedIn>
-                            <UserButton signInUrl='/sign-in' showName={true} afterSignOutUrl='/'
+                            <UserButton signInUrl='/sign-in' showName={false} afterSignOutUrl='/'
                                         afterMultiSessionSingleSignOutUrl='/' afterSwitchSessionUrl='/dashboard'
                                         userProfileUrl='/profile'/>
                         </SignedIn>
@@ -71,7 +71,7 @@ const Navbar = ({}) => {
                         <SignInButton redirectUrl='/dashboard'/>
                     </SignedOut>
                     <SignedIn>
-                        <UserButton signInUrl='/sign-in' showName={true} afterSignOutUrl='/'
+                        <UserButton signInUrl='/sign-in' showName={false} afterSignOutUrl='/'
                                     afterMultiSessionSingleSignOutUrl='/' afterSwitchSessionUrl='/dashboard'
                                     userProfileUrl='/profile'/>
                     </SignedIn>
