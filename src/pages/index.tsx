@@ -6,7 +6,7 @@ export default function Home() {
         <>
             <Navbar />
             {/* For large screens */}
-            <div className="flex-grow hidden items-center justify-center lg:grid lg:grid-cols-3 bg-cover bg-gray-500 bg-movies-background bg-repeat animate-ltr-linear-infinite">
+            <div className="text-white flex-grow hidden items-center justify-center lg:grid lg:grid-cols-3 bg-cover bg-gray-500 bg-movies-background bg-repeat animate-ltr-linear-infinite">
                 <div></div>
                 <div className="h-full bg-gradient-to-l from-black to-transparent"></div>
                 <div className="h-full p-10 bg-black">
@@ -37,7 +37,7 @@ export default function Home() {
             </div>
 
             {/* For small screens */}
-            <div className="flex-grow lg:hidden h-screen grid-container grid grid-cols-10 bg-cover bg-gray-500 flex flex-col items-center justify-center bg-movies-background bg-repeat animate-ltr-linear-infinite">
+            <div className="text-white flex-grow lg:hidden h-screen grid-container grid grid-cols-10 bg-cover bg-gray-500 flex flex-col items-center justify-center bg-movies-background bg-repeat animate-ltr-linear-infinite">
                 <div className="h-full bg-gradient-to-l from-black to-transparent col-span-2"></div>
                 <div className="text-center pt-10 h-full bg-black col-span-6">
                     <div className="font-bold text-4xl text-white mb-5">

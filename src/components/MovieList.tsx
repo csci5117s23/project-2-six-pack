@@ -21,14 +21,14 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
             {/* SEARCH FOR MOVIE/SHOW */}
             <div className="flex justify-center inter">
                 <input
-                    className="w-1/2 rounded-[7px] bg-transparent px-3 py-2.5 border border-hidden rounded-md text-sm shadow-sm placeholder-slate-400
+                    className="text-white mb-5 w-1/2 rounded-[7px] bg-transparent px-3 py-2.5 border border-hidden rounded-md text-sm shadow-sm placeholder-slate-400
                     focus:outline-none focus:border-slate-700 focus:ring-1 focus:ring-slate-700 inter text-sm font-normal"
                     placeholder="Movie Title..."
                     id="addMovieSearch"
                     autoComplete="off"
                     onChange={(e) => setInputText(e.target.value)}
                 />
-                <div className="flex justify-center">
+                <div className="mb-5 flex justify-center">
                     <button className="ml-3 justify-center bg-violet-700 hover:bg-violet-800 active:bg-violet-900 focus:outline-none focus:ring focus:ring-violet-500 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white inter" type="submit" onClick={() => console.log(inputText)}>Search</button>
                 </div>
             </div>
@@ -60,7 +60,7 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
             </div>
 
             <div className="flex justify-center mt-1">
-                <button className="text-xs inter hover:text-gray-400" onClick={onClose}>Close</button>
+                <button className="text-xs text-white inter hover:text-gray-400" onClick={onClose}>Close</button>
             </div>
             </Dialog.Panel>
         </div>
