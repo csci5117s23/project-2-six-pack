@@ -64,7 +64,7 @@ export async function updateMovieList(getToken: GetToken, movieList: MovieList):
 }
 
 export async function searchMoviesByTitle(getToken: GetToken, mediaTitle: string): Promise<Movie[] | null> {
-    return await makeApiCall<Movie[]>(getToken, 'search-movies', 'GET', [['query', mediaTitle]], 'searching media by title');
+    return await makeApiCall<Movie[]>(getToken, `search-movies/${mediaTitle}`, 'GET', null, 'searching media by title');
 }
 
 export async function getTmdbMovieGenres(getToken: GetToken): Promise<TmdbMovieGenre[] | null> {

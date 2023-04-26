@@ -190,14 +190,14 @@ function searchResultToMovie(searchResult: TmdbMovieSearchResult): Movie {
     } as Movie;
 }
 
-app.get('/search-movies', async (request: any, response: any): Promise<void> => {
+app.get('/search-movies/:title', async (request: any, response: any): Promise<void> => {
     if (request.userToken?.sub === null) {
         // Authentication is required
         response.status(401).end();
         return;
     }
 
-    const searchResults = await searchTmdbMoviesByQuery(request.body);
+    const searchResults = await searchTmdbMoviesByQuery([['query', request.params.title]]);
 
     if (searchResults === null || (searchResults as TmdbErrorResponse[])[0] !== undefined && (searchResults as TmdbErrorResponse[])[0]['status_message'] !== undefined) {
         // The search API call failed
