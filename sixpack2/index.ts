@@ -6,7 +6,7 @@ import {Movie, MovieList} from "../src/modules/types";
 import {getStreamingServicesForMovieWithTmdbId} from "./motn_impl";
 import {
     getTmdbGenres,
-    searchTmdbMoviesByQuery,
+    searchTmdbMoviesByQuery, TmdbErrorResponse,
     TmdbMovieGenresResult,
     TmdbMovieSearchResult,
     TmdbMovieSearchResults
@@ -179,8 +179,7 @@ app.get('/streaming-services/:id', async (request: any, response: any): Promise<
 
 function searchResultToMovie(searchResult: TmdbMovieSearchResult): Movie {
     return {
-        // Must be undefined so that Codehooks creates a new ID internally
-        _id: undefined,
+        // id is not defined so that Codehooks creates a new ID internally
         description: searchResult.overview,
         posterImageUrlPath: searchResult.poster_path,
         backdropImageUrlPath: searchResult.backdrop_path,
@@ -188,7 +187,7 @@ function searchResultToMovie(searchResult: TmdbMovieSearchResult): Movie {
         services: null,
         title: searchResult.title,
         tmdbId: searchResult.id
-    };
+    } as Movie;
 }
 
 app.get('/search-movies', async (request: any, response: any): Promise<void> => {
@@ -200,7 +199,7 @@ app.get('/search-movies', async (request: any, response: any): Promise<void> => 
 
     const searchResults = await searchTmdbMoviesByQuery(request.body);
 
-    if (searchResults === null || searchResults[0] !== undefined && searchResults[0]['status_message'] !== undefined) {
+    if (searchResults === null || (searchResults as TmdbErrorResponse[])[0] !== undefined && (searchResults as TmdbErrorResponse[])[0]['status_message'] !== undefined) {
         // The search API call failed
         response.status(500).json(searchResults);
         return;
@@ -247,7 +246,7 @@ app.get('/movie-genres', async (request: any, response: any): Promise<void> => {
 
     const genres = await getTmdbGenres();
 
-    if (genres === null || genres[0] !== undefined && genres[0]['status_message'] !== undefined) {
+    if (genres === null || (genres as TmdbErrorResponse[])[0] !== undefined && (genres as TmdbErrorResponse[])[0]['status_message'] !== undefined) {
         // The search API call failed
         response.status(500).json(genres);
         return;
