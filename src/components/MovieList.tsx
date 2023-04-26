@@ -29,7 +29,7 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
                     onChange={(e) => setInputText(e.target.value)}
                 />
                 <div className="flex justify-center">
-                    <button className="px-3 ml-3 bg-deep-purple hover:bg-vibrant-purple text-slate-200 hover:text-slate-200 rounded-full transition duration-300 inter" type="submit" onClick={() => console.log(inputText)}>Search</button>
+                    <button className="ml-3 justify-center bg-violet-700 hover:bg-violet-800 active:bg-violet-900 focus:outline-none focus:ring focus:ring-violet-500 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white inter" type="submit" onClick={() => console.log(inputText)}>Search</button>
                 </div>
             </div>
             {/* WE CAN EITHER LIST ALL MOVIES/SHOWS FROM THE API AND FILTER WHEN USER SEARCHES OR ONLY SHOW RESULTS WHEN USER SEARCHES */}

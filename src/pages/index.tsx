@@ -32,7 +32,7 @@ export default function Home() {
                         Screen Stash is a user-friendly website that allows you to create a personalized list of movies and TV shows that you want to watch. Not only that, it also helps you find out where you can watch them on various streaming services, all in one place.
                     </div>
                     <div>
-                        <Link href="/dashboard" className="rounded-full font-bold bg-deep-purple p-3">Dashboard</Link>
+                        <Link href="/dashboard" className="bg-violet-700 hover:bg-violet-800 active:bg-violet-900 focus:outline-none focus:ring focus:ring-violet-500 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white inter">Dashboard</Link>
                     </div>
                 </div>
             </div>
@@ -50,7 +50,7 @@ export default function Home() {
                         Screen Stash is a user-friendly website that allows you to create a personalized list of movies and TV shows that you want to watch. Not only that, it also helps you find out where you can watch them on various streaming services, all in one place.
                     </div>
                     <div>
-                        <Link href="/dashboard" className="rounded-full font-bold bg-deep-purple p-3">Dashboard</Link>
+                        <Link href="/dashboard" className="bg-violet-700 hover:bg-violet-800 active:bg-violet-900 focus:outline-none focus:ring focus:ring-violet-500 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white inter">Dashboard</Link>
                     </div>
                 </div>
                 <div className="h-screen bg-gradient-to-r from-black to-transparent col-span-2"></div>
