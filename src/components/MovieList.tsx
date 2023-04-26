@@ -71,7 +71,7 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
                     <div className="flex justify-center">
                         <input
                             className="w-1/2 rounded-[7px] bg-transparent px-3 py-2.5 border border-hidden rounded-md text-sm shadow-sm placeholder-slate-400
-                            focus:outline-none focus:border-slate-700 focus:ring-1 focus:ring-slate-700 inter text-sm font-normal"
+                            focus:outline-none focus:border-slate-700 focus:ring-1 focus:ring-slate-700 inter text-sm font-normal text-slate-200"
                             placeholder="Movie Title..."
                             id="addMovieSearch"
                             autoComplete="off"
@@ -193,7 +193,7 @@ const MovieList = (props: MovieListProps) => {
         <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
 
         {movies.length === 0 ?
-                <div className="justify-center text-center inter">Add Something To Get Started!</div>
+                <div className="justify-center text-center inter text-slate-200">Add Something To Get Started!</div>
                 : null}
 
         <div className="grid grid-cols-1 gap-5 md:grid-cols-3 lg:grid-cols-5 justify-center px-2">
