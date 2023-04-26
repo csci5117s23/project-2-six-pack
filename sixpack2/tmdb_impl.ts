@@ -70,7 +70,7 @@ export type TmdbMovieGenresResult = {
     genres: TmdbMovieGenre[];
 };
 
-type TmdbErrorResponse = {
+export type TmdbErrorResponse = {
     status_message: string;
     status_code: number;
 };
