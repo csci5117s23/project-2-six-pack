@@ -1,8 +1,10 @@
 import {useState} from "react";
 import {SignedIn, SignedOut, SignInButton, UserButton} from "@clerk/nextjs";
+import Modal from "./Modal";
 
 const Navbar = ({}) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -36,7 +38,8 @@ const Navbar = ({}) => {
 
 
                     <div className="hidden md:flex items-center space-x-1">
-                        <a href="" className="py-5 px-3 text-white-700 hover:text-gray-300">Search</a>
+                        <button onClick={() => setIsModalOpen(true)} className="py-5 px-3 text-white-700 hover:text-gray-300">Search</button>
+                        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
                         <a href="" className="py-5 px-3 text-white-700 hover:text-gray-300">Now Showing</a>
                         <SignedOut>
                             <SignInButton redirectUrl='/dashboard'/>
@@ -64,7 +67,8 @@ const Navbar = ({}) => {
 
             {/* Menu in mobile view */}
             <div className={`mobile-menu ${isMenuOpen ? 'block' : 'hidden'} md:hidden`}>
-                <a href="#" className="block py-2 px-4 text-sm hover:bg-gray-200">Search</a>
+                <button onClick={() => setIsModalOpen(true)} className="block py-2 px-4 text-sm hover:bg-gray-200">Search</button>
+                <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
                 <a href="#" className="block py-2 px-4 text-sm hover:bg-gray-200">Now Showing</a>
                 <div className="py-2 px-4">
                     <SignedOut>
