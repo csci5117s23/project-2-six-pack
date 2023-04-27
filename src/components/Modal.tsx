@@ -57,7 +57,7 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
                           autoComplete="off"
                           onChange={(e) => setInputText(e.target.value)}
                       />
-                      <input className="px-3 ml-3 bg-deep-purple hover:bg-vibrant-purple text-slate-200 hover:text-slate-200 rounded-full transition duration-300 inter" type="submit" value="Search" />
+                      <input className="ml-3 bg-violet-700 hover:bg-violet-800 active:bg-violet-900 focus:outline-none focus:ring focus:ring-violet-500 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white inter" type="submit" value="Search" />
                   </div>
               </form>
           </div>
