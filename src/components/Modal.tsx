@@ -66,61 +66,48 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
           <div className="grid place-items-start justify-items-center grid-flow-row overflow-y-auto mx-2 movie_list_h">
               <div className="grid gap-4 grid-cols-2 md:grid-cols-8 lg:gap-6 mt-1">
                       {/* Ensure that movielist is array and then iterate if so */}
-                      {Array.isArray(movies) && movies.map((movie) => {
-                          return (
-                              <div key={movie._id} className="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-black/30 rounded">
-                                  <img
-                                      className="rounded h-auto max-w-full transition-transform duration-500 group-hover:scale-125"
-                                      src={`https://image.tmdb.org/t/p/original${movie.posterImageUrlPath}`} alt=""/>
-                                  <div
-                                      className="absolute inset-0 flex translate-y-[60%] flex-col items-center justify-center px-9 text-center transition-all duration-500 group-hover:translate-y-0">
-                                      {/* TODO: ADD PREVIEW DETAILS */}
-                                      <div
-                                          className="mb-3 text-lg italic text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 text-ellipsis overflow-hidden">
-                                          {movie.description}
-                                      </div>
-                                      <Link href={{
-                                          pathname: "/movieDetails/",
-                                          query: {
-                                              id: movie._id,
-                                              title: movie.title
-                                          }
-                                      }}
-                                          as={`movieDetails/${movie.title}`}
-                                          className="rounded-full bg-neutral-900 py-1 px-1.5 text-sm capitalize text-white shadow shadow-black/60">
-                                          See More
-                                      </Link>
-                                  </div>
+                      {(!Array.isArray(movies) || !movies.length) ? (
+                            <div className='flex inter text-white text-lg justify-center text-center mt-2'>Nothing Found...</div>
+                            ) : (
+                            Array.isArray(movies) &&
+                                movies.map((movie) => {
+                                return (
+                                <div key={movie._id} className="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl rounded bg-black">
+                                    <img
+                                        className="rounded h-auto max-w-full transition-transform duration-500 group-hover:scale-125"
+                                        src={`https://image.tmdb.org/t/p/original${movie.posterImageUrlPath}`} alt=""/>
+                                    <div
+                                        className="absolute inset-0 flex translate-y-[60%] flex-col items-center justify-center px-9 text-center transition-all duration-500 group-hover:translate-y-0 text-ellipsis">
+                                        {/* TODO: ADD PREVIEW DETAILS */}
+                                        <div
+                                            className="mb-3 text-lg italic text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-black/60 overflow-hidden rounded">
+                                            {movie.title}
+                                            <div>{movie.releaseDate.substring(0,4)}</div>
+                                        </div>
+                                        <div className='flex'>
+                                            <Link href={{
+                                                pathname: "/movieDetails/",
+                                                query: {
+                                                    id: movie._id,
+                                                    title: movie.title
+                                                }
+                                            }}
+                                                as={`movieDetails/${movie.title}`}
+                                                className="rounded-full bg-neutral-900 py-1 px-1.5 text-sm capitalize text-white">
+                                                See More
+                                            </Link>
+                                            <button className="rounded-full bg-neutral-900 py-1 px-1.5 text-sm capitalize text-white">Add</button>
+                                        </div>
+                                    </div>
 
-                              </div>)
-                      })}
-                  
-                  {/* <div className="rounded h-64 md:h-80 h-auto w-32 md:w-48 md:max-h-80 bg-red-500">asda</div>
-                  <div className="rounded h-64 md:h-80 h-auto w-32 md:w-48 md:max-h-80 bg-green-500">asda</div>
-                  <div className="rounded h-64 md:h-80 h-auto w-32 md:w-48 md:max-h-80 bg-yellow-500">asda</div>
-                  <div className="rounded h-64 md:h-80 h-auto w-32 md:w-48 md:max-h-80 bg-slate-500">asda</div>
-                  <div className="rounded h-64 md:h-80 h-auto w-32 md:w-48 md:max-h-80 bg-red-500">asda</div>
-                  <div className="rounded h-64 md:h-80 h-auto w-32 md:w-48 md:max-h-80 bg-green-500">asda</div>
-                  <div className="rounded h-64 md:h-80 h-auto w-32 md:w-48 md:max-h-80 bg-yellow-500">asda</div>
-                  <div className="rounded h-64 md:h-80 h-auto w-32 md:w-48 md:max-h-80 bg-purple-500">asda</div>
-                  <div className="rounded h-64 md:h-80 h-auto md:w-48 md:max-h-80 bg-slate-500">asda</div>
-                  <div className="rounded h-64 md:h-80 h-auto w-32 md:w-48 md:max-h-80 bg-blue-500">asda</div>
-                  <div className="rounded h-64 md:h-80 h-auto md:w-48 md:max-h-80 bg-red-500">asda</div>
-                  <div className="rounded h-64 md:h-80 h-auto w-32 md:w-48 md:max-h-80 bg-green-500">asda</div>
-                  <div className="rounded h-64 md:h-80 h-auto w-32 md:w-48 md:max-h-80 bg-yellow-500">asda</div>
-                  <div className="rounded h-64 md:h-80 h-auto w-32 md:w-48 md:max-h-80 bg-slate-500">asda</div>
-                  <div className="rounded h-64 md:h-80 h-auto w-32 md:w-48 md:max-h-80 bg-red-500">asda</div>
-                  <div className="rounded h-64 md:h-80 h-auto w-32 md:w-48 md:max-h-80 bg-green-500">asda</div>
-                  <div className="rounded h-64 md:h-80 h-auto w-32 md:w-48 md:max-h-80 bg-yellow-500">asda</div>
-                  <div className="rounded h-64 md:h-80 h-auto w-32 md:w-48 md:max-h-80 bg-purple-500">asda</div>
-                  <div className="rounded h-64 md:h-80 h-auto md:w-48 md:max-h-80 bg-slate-500">asda</div>
-                  <div className="rounded h-64 md:h-80 h-auto w-32 md:w-48 md:max-h-80 bg-blue-500">asda</div> */}
+                                </div>)
+                        })
+                      )}
               </div>
+              <button className="text-xs text-white inter hover:text-gray-400 mt-1" onClick={onClose}>Close</button>
           </div>
 
-          <div className="flex justify-center mt-1">
-              <button className="text-xs text-white inter hover:text-gray-400" onClick={onClose}>Close</button>
-          </div>
+         
           </Dialog.Panel>
       </div>
     </Dialog>
