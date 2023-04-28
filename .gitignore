@@ -36,3 +36,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+sixpack2/.localserver/runtime.cjs
+sixpack2/.localserver/runtime.cjs
+*.cjs

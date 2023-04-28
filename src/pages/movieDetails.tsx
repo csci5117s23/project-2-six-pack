@@ -1,6 +1,9 @@
 import Navbar from "@/components/Navbar";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useAuth } from "@clerk/nextjs";
+import { useEffect, useState } from "react";
+import { getMediaInfo } from "../modules/api_calls";
+import { Movie } from "@/modules/types";
 
 export const getServerSideProps = (context: { query: { title: any; }; })=> {
     console.log(context.query) 
@@ -15,22 +18,42 @@ export const getServerSideProps = (context: { query: { title: any; }; })=> {
 export default function movieDetails() {
     const router = useRouter();
     const { query } = router;
+    const { getToken } = useAuth();
+
+    const [movie, setMovie] = useState<Movie | null>(null);
     
     const title = query.title
     const id = query.id
+
+    useEffect(() => {
+        async function getMovie() {
+            const movie = await getMediaInfo(getToken, id as string);
+
+            if (movie === null) {
+                // TODO: display error message or redirect to 404
+                return;
+            }
+  
+            setMovie(movie);
+        }
+  
+        getMovie().then().catch(e => console.error(e));
+    }, [getToken]);
+  
+    
 
     return(<>
     <Navbar />
     <div className="p-5 grid grid-rows-6 grid-cols-3 gap-4 justify-items-center">
         <div className="row-span-2 justify-center">
             {/* TODO: CHANGE IMAGE SRC */}
-            <img className="rounded h-auto w-auto image_height" src="https://image.tmdb.org/t/p/original/p9fmuz2Oj3HtEJEqbIwkFGUhVXD.jpg" alt="" />
+            <img className="rounded h-auto w-auto image_height" src={`https://image.tmdb.org/t/p/original${movie?.posterImageUrlPath ?? undefined}`} alt="" />
         </div>
         <div className="row-span-2 col-span-2 text-left ">
             <div className="inter md:text-2xl font-bold text-start">{title}</div>
             {/* TODO: CHANGE TO MOVIE DETAILS */}
-            <div className="inter mb-4 text-left">YEAR - RATING</div>
-            <div className="inter md:text-lg text-left">DESC</div>
+            <div className="inter mb-4 text-left">{movie?.releaseDate}</div>
+            <div className="inter md:text-lg text-left">{movie?.description}</div>
         </div>
          
         <div className="row-span-1 col-span-3 justify-center mt-5">

@@ -1,8 +1,20 @@
 import Link from "next/link";
 import Navbar from "../components/Navbar"
+import {useEffect} from "react";
+import {useRouter} from "next/router";
+import {useAuth} from "@clerk/nextjs";
 
 export default function Home() {
-    return (
+    const {isLoaded, isSignedIn} = useAuth();
+    const {push} = useRouter();
+
+    useEffect(() => {
+        if (isSignedIn) {
+            push('/dashboard').then(_result => {});
+        }
+    }, [isSignedIn]);
+
+    return isLoaded && (
         <>
             <Navbar />
             {/* For large screens */}
