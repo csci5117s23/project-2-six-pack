@@ -10,10 +10,12 @@ CSCI 5117, Spring 2022, [assignment description](https://canvas.umn.edu/courses/
 
 ### Students
 
-* Andrew Amakye Ansah, amaky001@umn.edu
+* Andrew Owens, owens518@umn.edu
 * Levi Cavagnetto, cavag004@umn.edu
-* ...
-
+* Nathan Kohane, kohan032@umn.edu
+* Andrew Amakye Ansah, amaky001@umn.edu
+* Johnny Jiang, jian0684@umn.edu
+* Ryan Hill, hill1886@umn.edu
 
 ## Key Features
 
