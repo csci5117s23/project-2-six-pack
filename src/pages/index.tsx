@@ -1,16 +1,16 @@
 import Link from "next/link";
 import Navbar from "../components/Navbar"
-import {useEffect} from "react";
-import {useRouter} from "next/router";
-import {useAuth} from "@clerk/nextjs";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+import { useAuth } from "@clerk/nextjs";
 
 export default function Home() {
-    const {isLoaded, isSignedIn} = useAuth();
-    const {push} = useRouter();
+    const { isLoaded, isSignedIn } = useAuth();
+    const { push } = useRouter();
 
     useEffect(() => {
         if (isSignedIn) {
-            push('/dashboard').then(_result => {});
+            push('/dashboard').then(_result => { });
         }
     }, [isSignedIn]);
 
