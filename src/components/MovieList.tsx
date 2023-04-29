@@ -17,30 +17,32 @@ const MovieList = (props: MovieListProps) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [movieList, setMovieList] = useState<MovieList | null>(null);
     const [movies, setMovies] = useState<Movie[]>([]);
+    const [movieListID, setMovieListID] = useState<string | null>("");
+    //PROBLEM: GET/CREATE MOVIE LIST ID
+    useEffect((): void => {
+        async function getMovieList() {
+            const movieList: MovieList | null = await (props.movieListId ? getMovieListById(getToken, props.movieListId) : getOrCreateInitialMovieList(getToken));
+            if (movieList === null) {
+                // TODO: display error message or redirect to 404
+                return;
+            }
 
-    // useEffect((): void => {
-    //     async function getMovieList() {
-    //         const movieList: MovieList | null = await (props.movieListId ? getMovieListById(getToken, props.movieListId) : getOrCreateInitialMovieList(getToken));
-    //         if (movieList === null) {
-    //             // TODO: display error message or redirect to 404
-    //             return;
-    //         }
+            setMovieList(movieList);
+            setMovieListID(props.movieListId)
+            for (let mediaId in movieList.movieIds) {
+                const media: Movie | null = await getMediaInfo(getToken, mediaId);
+                if (media === null) {
+                    // TODO: display error
+                    continue;
+                }
 
-    //         setMovieList(movieList);
+                setMovies(movies.concat(media));
+            }
+        }
 
-    //         for (let mediaId in movieList.movieIds) {
-    //             const media: Movie | null = await getMediaInfo(getToken, mediaId);
-    //             if (media === null) {
-    //                 // TODO: display error
-    //                 continue;
-    //             }
-
-    //             setMovies(movies.concat(media));
-    //         }
-    //     }
-
-    //     getMovieList().then().catch(e => console.error(e));
-    // }, [getToken, props.movieListId]);
+        getMovieList().then().catch(e => console.error(e));
+        console.log(movieListID)
+    }, [getToken, props.movieListId]);
 
     return (<>
         <div className="my-5 w-screen flex justify-center">
@@ -48,8 +50,8 @@ const MovieList = (props: MovieListProps) => {
                 Add New
             </button>
         </div>
-
-        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+        {/* PROBLEM: PASS movieListID TO MODAL */}
+        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} movieListID={movieListID}/>
 
         {movies.length === 0 ?
                 <div className="justify-center text-center inter text-slate-200">Add Something To Get Started!</div>
