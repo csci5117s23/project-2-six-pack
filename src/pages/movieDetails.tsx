@@ -58,12 +58,24 @@ export default function movieDetails() {
             <div className="justify-items-center mt-5">
                 <div className="inter md:text-2xl font-bold text-center">Where To Watch</div>
                 <div className="mt-3 flex justify-center">
-                    <span>Netflix</span>
-                    <span>HBO</span>
+                    <span className="px-2">Netflix</span>
+                    <span className="px-2">HBO</span>
+                    {movie?.services && Array.isArray(movie.services) && movie.services.map(service => {
+                        console.log(service);
+                        return (
+                            <span className="px-2">{service}</span>
+                        )
+                    })}
                 </div>
+            </div>
+            <div className="my-10 flex justify-center">
+                <button className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded inter">
+                    Add to List
+                </button>
             </div>
         </div>
 
+        {/* the content below wont be used anymore */}
         <div className="text-white bg-gradient-to-b from-black to-blue-900 p-5 grid grid-rows-6 grid-cols-3 gap-4 justify-items-center">
             <div className="row-span-2 justify-center">
                 <img className="rounded h-auto w-auto image_height" src={`https://image.tmdb.org/t/p/original${movie?.posterImageUrlPath ?? undefined}`} alt="" />
