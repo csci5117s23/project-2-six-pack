@@ -14,11 +14,12 @@ type ModalProps = {
 const Modal = ({isOpen, onClose}: ModalProps) => {
     const {getToken} = useAuth();
     const {addMovieToMovieList} = useMovieListContext();
-
+    const {checkIfMovieAdded} = useMovieListContext();
     const [inputText, setInputText] = useState("");
     const [movieTitle, setMovieTitle] = useState("");
     const [movieSearchResults, setMovieSearchResults] = useState<Movie[]>([]);
-
+    const [addedStatuses, setAddedStatuses] = useState<Record<string, boolean>>({});
+    const {deleteMovieFromMovieList} = useMovieListContext();
     // SEARCH FOR MOVIE BY TITLE
     useEffect(() => {
         async function searchMovies() {
@@ -36,6 +37,19 @@ const Modal = ({isOpen, onClose}: ModalProps) => {
             console.log(movieTitle)
         }
     }, [getToken, movieTitle]);
+
+    async function updateAddedStatuses() {
+        const newAddedStatuses: Record<string, boolean> = {};
+        for (const movie of movieSearchResults) {
+            newAddedStatuses[movie._id] = await checkIfMovieAdded(movie);
+        }
+        setAddedStatuses(newAddedStatuses);
+    }
+    
+    useEffect(() => {
+        updateAddedStatuses().catch(e => console.error(e));
+    }, [movieSearchResults]);
+    
 
     // Render Overlay screen with results from user search
     return (
@@ -98,12 +112,17 @@ const Modal = ({isOpen, onClose}: ModalProps) => {
                                                           className="rounded-full bg-neutral-900 py-1 px-1.5 text-sm capitalize text-white">
                                                         See More
                                                     </Link>
-                                                    {/* PROBLEM: ADD MOVIE */}
-                                                    <button
+                                                    {addedStatuses[movie._id] ? (
+                                                        <div>
+                                                        </div>
+                                                    ) : 
+                                                    (<button
                                                         className="rounded-full bg-vibrant-purple py-1 px-1.5 text-sm capitalize text-white"
-                                                        onClick={async () => await addMovieToMovieList(movie)}>
+                                                        onClick={async () => {
+                                                            await addMovieToMovieList(movie);
+                                                            updateAddedStatuses();}}>
                                                         Add
-                                                    </button>
+                                                    </button>)}
                                                 </div>
                                             </div>
 
