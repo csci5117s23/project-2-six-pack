@@ -8,6 +8,7 @@ export type MovieListContextValue = {
     movieListMovies: Movie[];
     addMovieToMovieList: (movie: Movie) => Promise<void>;
     deleteMovieFromMovieList: (movie: Movie) => Promise<void>;
+    checkIfMovieAdded: (movie: Movie) => Promise<boolean>;
 };
 
 const MovieListContext = createContext<MovieListContextValue>({
@@ -15,6 +16,7 @@ const MovieListContext = createContext<MovieListContextValue>({
     movieListMovies: [],
     addMovieToMovieList: () => Promise.resolve(),
     deleteMovieFromMovieList: () => Promise.resolve(),
+    checkIfMovieAdded: () => Promise.resolve(false),
 });
 
 export type MovieListContextProps = {
@@ -77,8 +79,11 @@ export default function MovieListContextProvider(props: PropsWithChildren<MovieL
             console.log("movie list does not exist")
             return;
         }
-        movieList.movieIds.push(movie._id);
+        //movieList.movieIds.push(movie._id);
         const index = movieList.movieIds.findIndex(id => id === movie._id);
+        if (index > -1) {
+            movieList.movieIds.splice(index, 1);
+        }
         //delete movieList.movieIds[movie._id]
         const updatedMovieList: MovieList | null = await updateMovieList(getToken, movieList);
         console.log('updated movie list', updatedMovieList);
@@ -92,8 +97,24 @@ export default function MovieListContextProvider(props: PropsWithChildren<MovieL
         setMovieListMovies(updatedMovieListMovies);
     }
 
+    async function checkIfMovieAdded(movie: Movie) {
+        console.log("Checking if movie already exists in MovieList")
+
+        if (!movieList) {
+            console.log("movie list does not exist")
+            return false;
+        }
+        const index = movieList.movieIds.findIndex(id => id === movie._id);
+        console.log(index)
+        if (index === -1) {
+            // TODO: display error message or redirect to 404
+            return false;
+        }
+        return true;
+    }
+
     return (
-        <MovieListContext.Provider value={{movieList: movieList, movieListMovies: movieListMovies, addMovieToMovieList: addMovieToMovieList, deleteMovieFromMovieList: deleteMovieFromMovieList}}>
+        <MovieListContext.Provider value={{movieList: movieList, movieListMovies: movieListMovies, addMovieToMovieList: addMovieToMovieList, deleteMovieFromMovieList: deleteMovieFromMovieList, checkIfMovieAdded: checkIfMovieAdded}}>
             {props.children}
         </MovieListContext.Provider>
     );
