@@ -82,6 +82,7 @@ export default function MovieListContextProvider(props: PropsWithChildren<MovieL
         //movieList.movieIds.push(movie._id);
         const index = movieList.movieIds.findIndex(id => id === movie._id);
         if (index > -1) {
+            console.log("deleting movie", index)
             movieList.movieIds.splice(index, 1);
         }
         //delete movieList.movieIds[movie._id]
@@ -89,6 +90,7 @@ export default function MovieListContextProvider(props: PropsWithChildren<MovieL
         console.log('updated movie list', updatedMovieList);
         if (updatedMovieList === null) {
             // TODO: display error message or redirect to 404
+            console.log("failed to update deletion")
             return;
         }
 

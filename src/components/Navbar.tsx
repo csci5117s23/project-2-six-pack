@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {SignedIn, SignedOut, SignInButton, UserButton} from "@clerk/nextjs";
 import Modal from "./Modal";
+import Link from "next/link";
 
 const Navbar = ({}) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,7 +19,7 @@ const Navbar = ({}) => {
                     <div className="flex space-x-4">
 
                         <div>
-                            <a href="#" className="flex items-center py-5 px-2 text-gray-700 hover:text-gray-900">
+                            <Link href="/dashboard" className="flex items-center py-5 px-2 text-gray-700 hover:text-gray-900">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                      fill="none" stroke="white" strokeWidth="2" strokeLinecap="round"
                                      strokeLinejoin="round">
@@ -32,7 +33,7 @@ const Navbar = ({}) => {
                                     <line x1="17" y1="7" x2="22" y2="7"></line>
                                 </svg>
                                 <span className="font-bold text-white px-2">ScreenStash</span>
-                            </a>
+                            </Link>
                         </div>
                     </div>
 

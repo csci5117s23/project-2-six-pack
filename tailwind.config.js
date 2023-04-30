@@ -7,6 +7,7 @@ module.exports = {
     extend: {
       backgroundImage: (theme) => ({
         'movies-background': "url('~/public/background.png')",
+        'missing-image': "url('~/public/missing_image.svg')",
       }),
       animation: {
         'ltr-linear-infinite': 'move-bg 360s linear infinite',
