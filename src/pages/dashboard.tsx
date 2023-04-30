@@ -13,7 +13,7 @@ export default function Dashboard() {
             <Navbar />
             <main className='flex-grow bg-gradient-to-b from-black to-blue-900'>
                 {/* Movie list */}
-                <MovieList movieListId={null}/>
+                <MovieList />
             </main>
         </>
     )

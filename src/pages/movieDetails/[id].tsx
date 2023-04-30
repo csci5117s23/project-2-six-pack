@@ -2,28 +2,19 @@ import Navbar from "@/components/Navbar";
 import { useRouter } from "next/router";
 import { useAuth } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
-import { getMediaInfo } from "../modules/api_calls";
+import { getMediaInfo } from "@/modules/api_calls";
 import { Movie } from "@/modules/types";
-
-export const getServerSideProps = (context: { query: { title: any; }; }) => {
-    console.log(context.query)
-    return {
-        props: {
-            title: context.query.title || null //pass it to the page props if need be. More of a middleware thing
-        }
-    }
-}
-
+import {useMovieListContext} from "@/components/MovieListContext";
 
 export default function movieDetails() {
     const router = useRouter();
     const { query } = router;
     const { getToken } = useAuth();
+    const {addMovieToMovieList} = useMovieListContext();
 
     const [movie, setMovie] = useState<Movie | null>(null);
 
-    const title = query.title
-    const id = query.id
+    const id = query.id;
 
     useEffect(() => {
         async function getMovie() {
@@ -40,17 +31,15 @@ export default function movieDetails() {
         getMovie().then().catch(e => console.error(e));
     }, [getToken]);
 
-
-
     return (<>
         <Navbar />
         <div className="text-white bg-gradient-to-b from-black to-blue-900 p-5">
             <div className=" grid lg:grid-rows-3 lg:grid-flow-col gap-4 lg:p-10">
                 <div className="row-span-3">
-                    <img className="rounded h-auto w-auto image_height" src={`https://image.tmdb.org/t/p/original${movie?.posterImageUrlPath ?? undefined}`} alt="" />
+                    {movie?.posterImageUrlPath && <img className="rounded h-auto w-auto image_height" src={`https://image.tmdb.org/t/p/original${movie.posterImageUrlPath}`} alt="" />}
                 </div>
                 <div className="col-span-2">
-                    <div className="inter md:text-2xl font-bold text-start col-span-2">{title}</div>
+                    <div className="inter md:text-2xl font-bold text-start col-span-2">{movie?.title}</div>
                     <div className="inter mb-4 text-left">{movie?.releaseDate}</div>
                 </div>
                 <div className="row-span-2 col-span-2 inter md:text-lg text-left">{movie?.description}</div>
@@ -69,7 +58,7 @@ export default function movieDetails() {
                 </div>
             </div>
             <div className="my-10 flex justify-center">
-                <button className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded inter">
+                <button className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded inter" onClick={async () => movie && addMovieToMovieList(movie)}>
                     Add to List
                 </button>
             </div>
@@ -78,10 +67,10 @@ export default function movieDetails() {
         {/* the content below wont be used anymore */}
         <div className="text-white bg-gradient-to-b from-black to-blue-900 p-5 grid grid-rows-6 grid-cols-3 gap-4 justify-items-center">
             <div className="row-span-2 justify-center">
-                <img className="rounded h-auto w-auto image_height" src={`https://image.tmdb.org/t/p/original${movie?.posterImageUrlPath ?? undefined}`} alt="" />
+                {movie?.posterImageUrlPath && <img className="rounded h-auto w-auto image_height" src={`https://image.tmdb.org/t/p/original${movie.posterImageUrlPath}`} alt="" />}
             </div>
             <div className="row-span-2 col-span-2 text-left ">
-                <div className="inter md:text-2xl font-bold text-start">{title}</div>
+                <div className="inter md:text-2xl font-bold text-start">{movie?.title}</div>
                 {/* TODO: CHANGE TO MOVIE DETAILS */}
                 <div className="inter mb-4 text-left">{movie?.releaseDate}</div>
                 <div className="inter md:text-lg text-left">{movie?.description}</div>
@@ -116,8 +105,7 @@ export default function movieDetails() {
                 </div>
             </div>
             <div className="row-span-1 col-span-3 justify-center">
-                {/* TODO: onClick(() => addMovieList()) */}
-                <button className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded inter">
+                <button className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded inter" onClick={async () => movie && addMovieToMovieList(movie)}>
                     Add to List
                 </button>
             </div>

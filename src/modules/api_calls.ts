@@ -46,21 +46,21 @@ export async function getOrCreateInitialMovieList(getToken: GetToken): Promise<M
 }
 
 export async function getMovieListById(getToken: GetToken, listId: string): Promise<MovieList | null> {
-    return await makeApiCall<MovieList>(getToken, `movie-list/${listId}`, 'GET', null, 'retrieving movie by ID');
+    return await makeApiCall<MovieList>(getToken, `movielist/${listId}`, 'GET', null, 'retrieving movie by ID');
 }
 
 export async function addMovieList(getToken: GetToken, movieList: MovieList): Promise<MovieList | null> {
-    return await makeApiCall<MovieList>(getToken, 'movie-list', 'POST', movieList, 'adding movie list');
+    return await makeApiCall<MovieList>(getToken, 'movielist', 'POST', movieList, 'adding movie list');
 }
 
 export async function deleteMovieList(getToken: GetToken, movieList: MovieList): Promise<{ _id: string } | null> {
     return await makeApiCall<{
         _id: string
-    }>(getToken, `movie-list/${movieList._id}`, 'DELETE', null, 'deleting movie list');
+    }>(getToken, `movielist/${movieList._id}`, 'DELETE', null, 'deleting movie list');
 }
 
 export async function updateMovieList(getToken: GetToken, movieList: MovieList): Promise<MovieList | null> {
-    return await makeApiCall<MovieList>(getToken, `movie-list/${movieList._id}`, 'PUT', movieList, 'updating movie list');
+    return await makeApiCall<MovieList>(getToken, `movielist/${movieList._id}`, 'PATCH', movieList, 'updating movie list');
 }
 
 export async function searchMoviesByTitle(getToken: GetToken, mediaTitle: string): Promise<Movie[] | null> {

@@ -48,7 +48,7 @@ app.use(async (request: any, _response: any, next: any): Promise<void> => {
 });
 
 // Step 2: Only allow the user to make requests for their movie lists
-app.use('/movie-list', (request: any, response: any, next: any): void => {
+app.use('/movielist', (request: any, response: any, next: any): void => {
     const userId = request.userToken?.sub;
     if (userId === null) {
         // Authentication is required
@@ -66,7 +66,7 @@ app.use('/movie-list', (request: any, response: any, next: any): void => {
 });
 
 // Step 3: Ensure the authenticated user is accessing its own resources
-app.use('/movie-list/:id', async (request: any, response: any, next: any): Promise<void> => {
+app.use('/movielist/:id', async (request: any, response: any, next: any): Promise<void> => {
     const id = request.params.id;
     const userId = request.userToken?.sub;
     if (userId === null) {
@@ -78,7 +78,7 @@ app.use('/movie-list/:id', async (request: any, response: any, next: any): Promi
     // Ensure the user requesting the movie list to be read/updated/replaced/deleted is the creator
     const connection = await Datastore.open();
     try {
-        const movieList = await connection.getOne('movie-list', id)
+        const movieList = await connection.getOne('movielist', id)
         if (movieList.creatorId !== userId) {
             // The authenticated user doesn't own this movie list
             response.status(403).end();
@@ -106,7 +106,7 @@ app.get('/initial-movie-list', async (request: any, response: any): Promise<void
     const connection = await Datastore.open();
     try {
         // Get the first movie list created by the user
-        let movieLists: MovieList[] | null = await getManyFromDatastore(connection, 'movie-list', {
+        let movieLists: MovieList[] | null = await getManyFromDatastore(connection, 'movielist', {
             filter: {
                 'creatorId': userId,
             },
@@ -115,10 +115,10 @@ app.get('/initial-movie-list', async (request: any, response: any): Promise<void
 
         if (movieLists.length === 0) {
             // Create the initial movie list for the user
-            const movieList = await connection.insertOne('movie-list', {
+            const movieList = await connection.insertOne('movielist', {
                 creatorId: userId,
                 name: 'My First List',
-                movieIds: []
+                movieIds: [],
             });
 
             response.status(201).json(movieList);
@@ -256,7 +256,7 @@ app.get('/movie-genres', async (request: any, response: any): Promise<void> => {
 });
 
 // Use Crudlify to create a REST API for any collection
-crudlify(app, {'movie-list': movieListSchema});
+crudlify(app, {'movielist': movieListSchema});
 
 // bind to serverless runtime
 // noinspection JSUnusedGlobalSymbols

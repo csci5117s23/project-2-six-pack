@@ -1,4 +1,8 @@
 {"files": [
   "./index.ts",
-  "tmdb_impl.ts"
+  "./tmdb_impl.ts",
+  "./codehooks_utils.ts",
+  "./fetch_utils.ts",
+  "./motn_impl.ts",
+  "./tmdb_impl.ts"
 ],"compilerOptions":{"lib":["es2015","dom"]}}
