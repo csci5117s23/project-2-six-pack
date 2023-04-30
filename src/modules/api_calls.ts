@@ -60,7 +60,7 @@ export async function deleteMovieList(getToken: GetToken, movieList: MovieList):
 }
 
 export async function updateMovieList(getToken: GetToken, movieList: MovieList): Promise<MovieList | null> {
-    return await makeApiCall<MovieList>(getToken, `movielist/${movieList._id}`, 'PATCH', movieList, 'updating movie list');
+    return await makeApiCall<MovieList>(getToken, `movielist/${movieList._id}`, 'PUT', movieList, 'updating movie list');
 }
 
 export async function searchMoviesByTitle(getToken: GetToken, mediaTitle: string): Promise<Movie[] | null> {

@@ -67,7 +67,7 @@ app.use('/movielist', (request: any, response: any, next: any): void => {
 
 // Step 3: Ensure the authenticated user is accessing its own resources
 app.use('/movielist/:id', async (request: any, response: any, next: any): Promise<void> => {
-    const id = request.params.id;
+    const id = request.params.ID;
     const userId = request.userToken?.sub;
     if (userId === null) {
         // Authentication is required
@@ -78,7 +78,7 @@ app.use('/movielist/:id', async (request: any, response: any, next: any): Promis
     // Ensure the user requesting the movie list to be read/updated/replaced/deleted is the creator
     const connection = await Datastore.open();
     try {
-        const movieList = await connection.getOne('movielist', id)
+        const movieList = await connection.getOne('movielist', id);
         if (movieList.creatorId !== userId) {
             // The authenticated user doesn't own this movie list
             response.status(403).end();
