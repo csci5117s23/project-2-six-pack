@@ -44,7 +44,7 @@ export default function TheaterLocations() {
         if(mapRef && isLoaded){
             applyRange();
         }
-    }, [center])
+    }, [center]);
 
     async function clickMarkerEvent(index: any) {
 
@@ -52,13 +52,13 @@ export default function TheaterLocations() {
         const end = new google.maps.LatLng(
             clickMarkers[index].getPosition()?.lat(),
             clickMarkers[index].getPosition()?.lng()
-        )
+        );
 
         const request = {
             origin: start,
             destination: end,
             travelMode: 'DRIVING'
-        }
+        };
 
         // Draw the route from the center marker to the clicked marker
         directionsServiceHolder.route(request, (response: any, status: any) => {
@@ -67,7 +67,7 @@ export default function TheaterLocations() {
             } else {
                 alert("Failed to render directions");
             }
-        })
+        });
 
         // Get information about the current marker
         const detailsRequest = {
@@ -80,14 +80,14 @@ export default function TheaterLocations() {
                 'website',
                 'opening_hours'
             ]
-        }
+        };
 
         const markerDetails = new Promise((resolve, reject) => {
             let service = new google.maps.places.PlacesService(mapRef);
             service.getDetails(detailsRequest, (place) => {
                 resolve(place);
             })
-        })
+        });
 
         markerDetails.then((value: any) => {
             
@@ -143,7 +143,7 @@ export default function TheaterLocations() {
             const infowindow = new google.maps.InfoWindow({
                 content: contentString,
                 ariaLabel: value.name,
-            })
+            });
             infowindow.open(mapRef, clickMarkers[index]);
         })
     }
@@ -237,11 +237,11 @@ export default function TheaterLocations() {
                     lng: position.coords.longitude,
                 });
                 map.setCenter(center);
-            })
+            });
 
             const rendererOptions = {
                 suppressMarkers: true,
-            }
+            };
 
             const directionsService = new google.maps.DirectionsService;
             const directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
