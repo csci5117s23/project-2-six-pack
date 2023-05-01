@@ -165,7 +165,7 @@ app.get('/streaming-services/:id', async (request: any, response: any): Promise<
 
         const movie: Movie = await connection.getOne('media', id);
 
-        if (!movie.services) {
+        if (movie.services === null) {
             movie.services = await getStreamingServicesForMovieWithTmdbId(movie.tmdbId);
             await connection.updateOne('media', movie._id, movie);
         }

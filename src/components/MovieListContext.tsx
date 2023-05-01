@@ -9,6 +9,7 @@ export type MovieListContextValue = {
     addMovieToMovieList: (movie: Movie) => Promise<void>;
     deleteMovieFromMovieList: (movie: Movie) => Promise<void>;
     isMovieInMovieList: (movie: Movie) => boolean;
+    updateMovie: (movie: Movie) => void;
 };
 
 const MovieListContext = createContext<MovieListContextValue>({
@@ -17,6 +18,7 @@ const MovieListContext = createContext<MovieListContextValue>({
     addMovieToMovieList: () => Promise.resolve(),
     deleteMovieFromMovieList: () => Promise.resolve(),
     isMovieInMovieList: () => false,
+    updateMovie: () => {},
 });
 
 export type MovieListContextProps = {
@@ -106,13 +108,18 @@ export default function MovieListContextProvider(props: PropsWithChildren<MovieL
         return index !== -1;
     }
 
+    function updateMovie(movie: Movie) {
+        setMovieListMovies(movieListMovies.map(movieListMovie => movieListMovie._id === movie._id ? movie : movieListMovie));
+    }
+
     return (
         <MovieListContext.Provider value={{
             movieList: movieList,
             movieListMovies: movieListMovies,
             addMovieToMovieList: addMovieToMovieList,
             deleteMovieFromMovieList: deleteMovieFromMovieList,
-            isMovieInMovieList: isMovieInMovieList
+            isMovieInMovieList: isMovieInMovieList,
+            updateMovie: updateMovie
         }}>
             {props.children}
         </MovieListContext.Provider>
