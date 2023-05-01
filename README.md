@@ -69,7 +69,10 @@ Which (if any) progressive web app feature(s) does your app support?
 **[Add a screenshot of each key page](https://stackoverflow.com/questions/10189356/how-to-add-screenshot-to-readmes-in-github-repository)
 along with a very brief caption:**
 
+![](pics/homeScreen.png?raw=true "Details")
 ![](pics/dashboard.png?raw=true "Details")
+![](pics/gmaps.png?raw=true "Details")
+
 
 
 ## External Dependencies
