@@ -94,7 +94,7 @@ const Modal = ({isOpen, onClose}: ModalProps) => {
                                 movieSearchResults.map((movie) => {
                                     return (
                                         <div key={movie._id}
-                                             className="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl rounded bg-black bg-missing-image bg-no-repeat">
+                                             className="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl rounded bg-black bg-missing-image bg-no-repeat bg-center">
                                             {movie.posterImageUrlPath && <img
                                                 className="rounded h-auto max-w-full transition-transform duration-500 group-hover:scale-125"
                                                 src={`https://image.tmdb.org/t/p/original${movie.posterImageUrlPath}`}
