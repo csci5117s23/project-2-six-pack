@@ -56,6 +56,11 @@ export default function movieDetails() {
     }
 
     function doSetMovieServices(movie: Movie) {
+        if (movie.services === null) {
+            setMovieServices(null);
+            return;
+        }
+
         const movieServices: [string, MotnStreamingType[]][] = [];
         for (const service in movie.services) {
             const streamingInformation = movie.services[service];
@@ -91,7 +96,7 @@ export default function movieDetails() {
                                     <div>
                                         {streamingInformation.map(streamingInfo => (
                                             <div className='flex gap-1'>
-                                                <span>{`${streamingInfo.type} (${streamingInfo.quality}):`}</span>
+                                                <span>{`${streamingInfo.type}${streamingInfo.quality && ` (${streamingInfo.quality})`}:`}</span>
                                                 {(streamingInfo.link || streamingInfo.watchLink) && <div>
                                                     <a href={streamingInfo.link ?? streamingInfo.watchLink}
                                                        target="_blank"
