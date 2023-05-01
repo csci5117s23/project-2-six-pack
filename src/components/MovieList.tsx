@@ -28,10 +28,14 @@ const MovieList = () => {
             {movieListMovies.map((movie) => {
                 return (
                     <div key={movie._id}
-                        className="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl rounded bg-black">
+                        className="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl rounded bg-black bg-missing-image bg-no-repeat">
                         {movie.posterImageUrlPath && <img
                             className="rounded h-auto max-w-full transition-transform duration-500 group-hover:scale-125"
                             src={`https://image.tmdb.org/t/p/original${movie.posterImageUrlPath}`}
+                            onError={({ currentTarget }) => {
+                                currentTarget.onerror = null;
+                                currentTarget.src="/project-2-six-pack/public/missing_image.svg";
+                            }}
                             alt=""/>}
                         <div
                             className="absolute inset-0 flex translate-y-[100%] flex-col items-center justify-center px-9 text-center transition-all duration-500 group-hover:translate-y-0 text-ellipsis bg-black/60">
