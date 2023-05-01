@@ -232,11 +232,12 @@ export default function TheaterLocations() {
     const onLoad = useCallback(function callback(map: any) {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position: GeolocationPosition) => {
+                map.setCenter({lat: position.coords.latitude, lng: position.coords.longitude});
                 setCenter({
                     lat: position.coords.latitude,
                     lng: position.coords.longitude,
                 });
-                map.setCenter(center);
+                //map.setCenter(center);
             });
 
             const rendererOptions = {
