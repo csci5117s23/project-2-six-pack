@@ -11,9 +11,9 @@ export default function Dashboard() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
             <Navbar />
-            <main className='h-screen'>
+            <main className='flex-grow bg-gradient-to-b from-black to-blue-900'>
                 {/* Movie list */}
-                <MovieList movieListId={null}/>
+                <MovieList />
             </main>
         </>
     )
