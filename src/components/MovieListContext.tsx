@@ -24,7 +24,7 @@ export type MovieListContextProps = {
 }
 
 export default function MovieListContextProvider(props: PropsWithChildren<MovieListContextProps>) {
-    const { getToken } = useAuth();
+    const {getToken} = useAuth();
 
     const [movieList, setMovieList] = useState<MovieList | null>(null);
     const [movieListMovies, setMovieListMovies] = useState<Movie[]>([]);
@@ -38,15 +38,10 @@ export default function MovieListContextProvider(props: PropsWithChildren<MovieL
             }
 
             setMovieList(movieList);
-            for (let mediaId in movieList.movieIds) {
-                const media: Movie | null = await getMediaInfo(getToken, mediaId);
-                if (media === null) {
-                    // TODO: display error
-                    continue;
-                }
 
-                setMovieListMovies(movieListMovies.concat(media));
-            }
+            setMovieListMovies(await Promise.all(movieList.movieIds
+                .map(async movieId => await getMediaInfo(getToken, movieId))
+                .filter(async movie => (await movie) !== null) as Promise<Movie>[]));
         }
 
         getMovieList().then().catch(e => console.error(e));
@@ -108,15 +103,17 @@ export default function MovieListContextProvider(props: PropsWithChildren<MovieL
         }
         const index = movieList.movieIds.findIndex(id => id === movie._id);
         console.log(index)
-        if (index === -1) {
-            // TODO: display error message or redirect to 404
-            return false;
-        }
-        return true;
+        return index !== -1;
     }
 
     return (
-        <MovieListContext.Provider value={{movieList: movieList, movieListMovies: movieListMovies, addMovieToMovieList: addMovieToMovieList, deleteMovieFromMovieList: deleteMovieFromMovieList, checkIfMovieAdded: checkIfMovieAdded}}>
+        <MovieListContext.Provider value={{
+            movieList: movieList,
+            movieListMovies: movieListMovies,
+            addMovieToMovieList: addMovieToMovieList,
+            deleteMovieFromMovieList: deleteMovieFromMovieList,
+            checkIfMovieAdded: checkIfMovieAdded
+        }}>
             {props.children}
         </MovieListContext.Provider>
     );
