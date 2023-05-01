@@ -13,6 +13,11 @@ import {
 } from "./tmdb_impl";
 import {getManyFromDatastore} from "./codehooks_utils";
 
+// https://stackoverflow.com/a/51466112
+import fetch from 'node-fetch'
+// @ts-ignore
+globalThis.fetch = fetch;
+
 /**
  * A schema representing a collection of movies a user has created
  */
