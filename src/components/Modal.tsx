@@ -13,13 +13,11 @@ type ModalProps = {
 
 const Modal = ({isOpen, onClose}: ModalProps) => {
     const {getToken} = useAuth();
-    const {addMovieToMovieList} = useMovieListContext();
-    const {checkIfMovieAdded} = useMovieListContext();
+    const {isMovieInMovieList, addMovieToMovieList} = useMovieListContext();
     const [inputText, setInputText] = useState("");
     const [movieTitle, setMovieTitle] = useState("");
     const [movieSearchResults, setMovieSearchResults] = useState<Movie[]>([]);
-    const [addedStatuses, setAddedStatuses] = useState<Record<string, boolean>>({});
-    const {deleteMovieFromMovieList} = useMovieListContext();
+
     // SEARCH FOR MOVIE BY TITLE
     useEffect(() => {
         async function searchMovies() {
@@ -37,19 +35,6 @@ const Modal = ({isOpen, onClose}: ModalProps) => {
             console.log(movieTitle)
         }
     }, [getToken, movieTitle]);
-
-    async function updateAddedStatuses() {
-        const newAddedStatuses: Record<string, boolean> = {};
-        for (const movie of movieSearchResults) {
-            newAddedStatuses[movie._id] = await checkIfMovieAdded(movie);
-        }
-        setAddedStatuses(newAddedStatuses);
-    }
-    
-    useEffect(() => {
-        updateAddedStatuses().catch(e => console.error(e));
-    }, [movieSearchResults]);
-    
 
     // Render Overlay screen with results from user search
     return (
@@ -81,8 +66,6 @@ const Modal = ({isOpen, onClose}: ModalProps) => {
                             </div>
                         </form>
                     </div>
-                    {/* WE CAN EITHER LIST ALL MOVIES/SHOWS FROM THE API AND FILTER WHEN USER SEARCHES OR ONLY SHOW RESULTS WHEN USER SEARCHES */}
-                    {/* EITHER WAY, THIS SHOULD BE THE GENERAL LAYOUT, REPLACE THE INNER DIV WITH MOVIE API COMPONENT */}
                     <div
                         className="grid place-items-start justify-items-center grid-flow-row overflow-y-auto mx-2 movie_list_h">
                         <div className="grid gap-4 grid-cols-2 md:grid-cols-8 lg:gap-6 mt-1">
@@ -98,10 +81,10 @@ const Modal = ({isOpen, onClose}: ModalProps) => {
                                             {movie.posterImageUrlPath && <img
                                                 className="rounded h-auto max-w-full transition-transform duration-500 group-hover:scale-125"
                                                 src={`https://image.tmdb.org/t/p/original${movie.posterImageUrlPath}`}
-                                                onError={({ currentTarget }) => {
+                                                onError={({currentTarget}) => {
                                                     currentTarget.onerror = null;
-                                                    currentTarget.src="/project-2-six-pack/public/missing_image.svg";
-                                                  }}
+                                                    currentTarget.src = "/project-2-six-pack/public/missing_image.svg";
+                                                }}
                                                 alt="No Image Found"/>}
                                             <div
                                                 className="absolute inset-0 flex translate-y-[100%] flex-col items-center justify-center px-9 text-center transition-all duration-500 group-hover:translate-y-0 text-ellipsis bg-black/60">
@@ -116,17 +99,11 @@ const Modal = ({isOpen, onClose}: ModalProps) => {
                                                           className="rounded-full bg-neutral-900 py-1 px-1.5 text-sm capitalize text-white">
                                                         See More
                                                     </Link>
-                                                    {addedStatuses[movie._id] ? (
-                                                        <div>
-                                                        </div>
-                                                    ) : 
-                                                    (<button
-                                                        className="rounded-full bg-vibrant-purple py-1 px-1.5 text-sm capitalize text-white"
-                                                        onClick={async () => {
-                                                            await addMovieToMovieList(movie);
-                                                            updateAddedStatuses();}}>
-                                                        Add
-                                                    </button>)}
+                                                    {!isMovieInMovieList(movie) && <button
+                                                            className="rounded-full bg-vibrant-purple py-1 px-1.5 text-sm capitalize text-white"
+                                                            onClick={async () => await addMovieToMovieList(movie)}>
+                                                            Add
+                                                        </button>}
                                                 </div>
                                             </div>
 
@@ -134,7 +111,8 @@ const Modal = ({isOpen, onClose}: ModalProps) => {
                                 })
                             )}
                         </div>
-                        <button className="text-xs text-white inter hover:text-gray-400 mt-1" onClick={onClose}>Close
+                        <button className="text-xs text-white inter hover:text-gray-400 mt-1" onClick={onClose}>
+                            Close
                         </button>
                     </div>
 

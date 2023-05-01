@@ -8,7 +8,7 @@ export type MovieListContextValue = {
     movieListMovies: Movie[];
     addMovieToMovieList: (movie: Movie) => Promise<void>;
     deleteMovieFromMovieList: (movie: Movie) => Promise<void>;
-    checkIfMovieAdded: (movie: Movie) => Promise<boolean>;
+    isMovieInMovieList: (movie: Movie) => boolean;
 };
 
 const MovieListContext = createContext<MovieListContextValue>({
@@ -16,7 +16,7 @@ const MovieListContext = createContext<MovieListContextValue>({
     movieListMovies: [],
     addMovieToMovieList: () => Promise.resolve(),
     deleteMovieFromMovieList: () => Promise.resolve(),
-    checkIfMovieAdded: () => Promise.resolve(false),
+    isMovieInMovieList: () => false,
 });
 
 export type MovieListContextProps = {
@@ -74,7 +74,7 @@ export default function MovieListContextProvider(props: PropsWithChildren<MovieL
             console.log("movie list does not exist")
             return;
         }
-        //movieList.movieIds.push(movie._id);
+
         const index = movieList.movieIds.findIndex(id => id === movie._id);
         if (index > -1) {
             console.log("deleting movie", index)
@@ -94,7 +94,7 @@ export default function MovieListContextProvider(props: PropsWithChildren<MovieL
         setMovieListMovies(updatedMovieListMovies);
     }
 
-    async function checkIfMovieAdded(movie: Movie) {
+    function isMovieInMovieList(movie: Movie): boolean {
         console.log("Checking if movie already exists in MovieList")
 
         if (!movieList) {
@@ -112,7 +112,7 @@ export default function MovieListContextProvider(props: PropsWithChildren<MovieL
             movieListMovies: movieListMovies,
             addMovieToMovieList: addMovieToMovieList,
             deleteMovieFromMovieList: deleteMovieFromMovieList,
-            checkIfMovieAdded: checkIfMovieAdded
+            isMovieInMovieList: isMovieInMovieList
         }}>
             {props.children}
         </MovieListContext.Provider>
