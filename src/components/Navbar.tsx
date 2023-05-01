@@ -41,7 +41,7 @@ const Navbar = ({}) => {
                     <div className="hidden md:flex items-center space-x-1">
                         <button onClick={() => setIsModalOpen(true)} className="py-5 px-3 text-white-700 hover:text-gray-300">Search</button>
                         <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-                        <a href="" className="py-5 px-3 text-white-700 hover:text-gray-300">Now Showing</a>
+                        <Link href="/gmaps" className="py-5 px-3 text-white-700 hover:text-gray-300">Nearby Theaters</Link>
                         <SignedOut>
                             <SignInButton redirectUrl='/dashboard'/>
                         </SignedOut>
@@ -70,7 +70,7 @@ const Navbar = ({}) => {
             <div className={`mobile-menu ${isMenuOpen ? 'block' : 'hidden'} md:hidden`}>
                 <button onClick={() => setIsModalOpen(true)} className="block py-2 px-4 text-sm hover:bg-gray-200">Search</button>
                 <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-                <a href="#" className="block py-2 px-4 text-sm hover:bg-gray-200">Now Showing</a>
+                <Link href="/gmaps" className="block py-2 px-4 text-sm hover:bg-gray-200">Now Showing</Link>
                 <div className="py-2 px-4">
                     <SignedOut>
                         <SignInButton redirectUrl='/dashboard'/>
