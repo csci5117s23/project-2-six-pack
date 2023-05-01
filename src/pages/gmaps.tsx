@@ -1,8 +1,10 @@
 import GoogleMaps from "@/components/GoogleMaps";
-import {UserProfile} from "@clerk/nextjs";
+import Navbar from "@/components/Navbar";
 
-export default function MapsView() {
-    return <>
-        <GoogleMaps></GoogleMaps>
+export default function Profile() {
+    return ( <>
+        <Navbar />
+        <GoogleMaps />
     </>
+    )
 }
