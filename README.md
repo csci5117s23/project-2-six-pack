@@ -6,7 +6,7 @@ CSCI 5117, Spring 2022, [assignment description](https://canvas.umn.edu/courses/
 
 * Team Name: Six Pack
 * App Name: ScreenStash
-* App Link: https://screeenstash.netlify.app/
+* App Link: https://screenstash.netlify.app/
 
 ### Students
 
