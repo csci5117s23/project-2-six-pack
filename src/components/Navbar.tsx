@@ -41,7 +41,7 @@ const Navbar = ({}) => {
                     <div className="hidden md:flex items-center space-x-1">
                         <button onClick={() => setIsModalOpen(true)} className="py-5 px-3 text-white-700 hover:text-gray-300">Search</button>
                         <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-                        <a href="" className="py-5 px-3 text-white-700 hover:text-gray-300">Now Showing</a>
+                        <Link href="/gmaps" className="py-5 px-3 text-white-700 hover:text-gray-300">Nearby Theaters</Link>
                         <SignedOut>
                             <SignInButton redirectUrl='/dashboard'/>
                         </SignedOut>
