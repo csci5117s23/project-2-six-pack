@@ -70,7 +70,7 @@ const Navbar = ({}) => {
             <div className={`mobile-menu ${isMenuOpen ? 'block' : 'hidden'} md:hidden`}>
                 <button onClick={() => setIsModalOpen(true)} className="block py-2 px-4 text-sm hover:bg-gray-200">Search</button>
                 <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-                <a href="#" className="block py-2 px-4 text-sm hover:bg-gray-200">Now Showing</a>
+                <Link href="/gmaps" className="block py-2 px-4 text-sm hover:bg-gray-200">Now Showing</Link>
                 <div className="py-2 px-4">
                     <SignedOut>
                         <SignInButton redirectUrl='/dashboard'/>
