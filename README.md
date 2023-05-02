@@ -71,8 +71,10 @@ along with a very brief caption:**
 
 ![](pics/homeScreen.png?raw=true "Details")
 * On the homescreen, a user can view basic website features and login
+
 ![](pics/dashboard.png?raw=true "Details")
 * On the dashboard, a user can search for movies and add them to their list. As the list populates, the user can edit and delete movies in it as they choose
+
 ![](pics/gmaps.png?raw=true "Details")
 * On the nearby theater page, a user can view the physical location of movies within 50,000 meters (the max radius allowed by the Maps API's `nearbySearch()` function). The user can then click on the generated theater markers to view information about the given theater
 
@@ -83,9 +85,9 @@ along with a very brief caption:**
 **Document integrations with 3rd Party code or services here.
 Please do not document required libraries (e.g., Vue, Vuefire, Firebase).**
 
-* TMDb API: For each movie displayed or searched for on the home page, we query the TMDb API for its broad specifics. These include original release date, popularity, genre, original language, and a link to an image of the movie's release poster. This information is then processed and rendered on the dashboard and homescreen on the website.
-* Movie of the Night Streaming Availability API: We use the MotN API to query streaming services for a given movie. This includes overview data, such as the platform the movie is being streamed on, and more specific content such as price, audio information, and available subtitles.
-* Google Maps API: For the device integrations part of the project requirements, we decided to use a Google Maps widget to display available movie theaters surrounding the user. From a call to the browser's geolocation API, we use this location to center the screen and generate a marker. Then, a `nearbySearch()` call is made to the Google Maps API, and a unique marker is generated on the map for every object returned with information about the theater.
+* **TMDb API**: For each movie displayed or searched for on the home page, we query the TMDb API for its broad specifics. These include original release date, popularity, genre, original language, and a link to an image of the movie's release poster. This information is then processed and rendered on the dashboard and homescreen on the website.
+* **Movie of the Night Streaming Availability API**: We use the MotN API to query streaming services for a given movie. This includes overview data, such as the platform the movie is being streamed on, and more specific content such as price, audio information, and available subtitles.
+* **Google Maps API**: For the device integrations part of the project requirements, we decided to use a Google Maps widget to display available movie theaters surrounding the user. From a call to the browser's geolocation API, we use this location to center the screen and generate a marker. Then, a `nearbySearch()` call is made to the Google Maps API, and a unique marker is generated on the map for every object returned with information about the theater.
 
 **If there's anything else you would like to disclose about how your project
 relied on external code, expertise, or anything else, please disclose that
