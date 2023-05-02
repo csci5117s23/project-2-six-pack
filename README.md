@@ -22,11 +22,11 @@ CSCI 5117, Spring 2022, [assignment description](https://canvas.umn.edu/courses/
 **Describe the most challenging features you implemented
 (one sentence per bullet, maximum 4 bullets):**
 
-* ...
+* The Google Maps API integrations were somewhat hard to implement, as there is not an incredible amount of documentation for the @react-google-maps/api package and React lifecycle hooks are hard to manage when the Google Maps map object is updating.
 
 Which (if any) device integration(s) does your app support?
 
-* ...
+* Our Google Maps widget supports device location via the geolocation browser API. This location is then used to perform a nearby search for surrounding movie theaters.
 
 Which (if any) progressive web app feature(s) does your app support?
 
@@ -81,10 +81,13 @@ along with a very brief caption:**
 Please do not document required libraries (e.g., Vue, Vuefire, Firebase).**
 
 * Library or service name: description of use
-* ...
+* TMDb API:
+* Movie of the Night Streaming Availability API:
+* Google Maps API: For the device integrations part of the project requirements, we decided to use a Google Maps widget to display available movie theaters surrounding the user. From a call to the browser's geolocation API, we use this location to center the screen and generate a marker. Then, a `nearbySearch()` call is made to the Google Maps API, and a unique marker is generated on the map for every object returned. Lastly, when a user clicks a marker, a route is drawn between the user's marker and the clicked marker, and information about the theater is displayed above the marker.
 
 **If there's anything else you would like to disclose about how your project
 relied on external code, expertise, or anything else, please disclose that
 here:**
+* Parts of the Google Maps widget (including its CSS, infoWindow, and MapControl interface) were sourced from and inspired by the official documentation. We did this to keep code and visual continuity with the Google Maps objects rendered by the npm package.
 
 ...
