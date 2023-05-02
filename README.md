@@ -83,7 +83,7 @@ Please do not document required libraries (e.g., Vue, Vuefire, Firebase).**
 * Library or service name: description of use
 * TMDb API:
 * Movie of the Night Streaming Availability API:
-* Google Maps API: For the device integrations part of the project requirements, we decided to use a Google Maps widget to display available movie theaters surrounding the user. From a call to the browser's geolocation API, we use this location to center the screen and generate a marker. Then, a `nearbySearch()` call is made to the Google Maps API, and a unique marker is generated on the map for every object returned. Lastly, when a user clicks a marker, a route is drawn between the user's marker and the clicked marker, and information about the theater is displayed above the marker.
+* Google Maps API: For the device integrations part of the project requirements, we decided to use a Google Maps widget to display available movie theaters surrounding the user. From a call to the browser's geolocation API, we use this location to center the screen and generate a marker. Then, a `nearbySearch()` call is made to the Google Maps API, and a unique marker is generated on the map for every object returned with information about the theater.
 
 **If there's anything else you would like to disclose about how your project
 relied on external code, expertise, or anything else, please disclose that
