@@ -72,8 +72,10 @@ along with a very brief caption:**
 ![](pics/homeScreen.png?raw=true "Details")
 * On the homescreen, a user can view basic website features and login
 
+
 ![](pics/dashboard.png?raw=true "Details")
 * On the dashboard, a user can search for movies and add them to their list. As the list populates, the user can edit and delete movies in it as they choose
+
 
 ![](pics/gmaps.png?raw=true "Details")
 * On the nearby theater page, a user can view the physical location of movies within 50,000 meters (the max radius allowed by the Maps API's `nearbySearch()` function). The user can then click on the generated theater markers to view information about the given theater
